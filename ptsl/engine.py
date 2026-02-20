@@ -971,7 +971,7 @@ class Engine:
                                            enabled=new_state)
         self.client.run(op)
 
-    def get_edit_selection(self, loc_type: TimelineLocationType = TLType_TimeCode
+    def get_edit_selection(self, loc_type: 'TimelineLocationType' = TLType_TimeCode
                                ) -> Tuple[str, str]:
         """
         Returns data about the current edit selection.
