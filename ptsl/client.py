@@ -210,7 +210,6 @@ class Client:
         Convert the request body into a JSON string (or an empty string if
         there is no request body.
         """
-        print(operation.request)
         if operation.request is None:
             request_body_json = ""
         else:
