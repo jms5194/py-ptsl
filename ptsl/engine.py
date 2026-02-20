@@ -971,14 +971,14 @@ class Engine:
                                            enabled=new_state)
         self.client.run(op)
 
-    def get_edit_selection(self, format: TimelineLocationType = TLType_TimeCode
+    def get_edit_selection(self, loc_type: TimelineLocationType = TLType_TimeCode
                                ) -> Tuple[str, str]:
         """
-        Returns data about the current timeline selection.
+        Returns data about the current edit selection.
 
         :returns: a Tuple of the In and Out time.
         """
-        op = ops.CId_GetEditSelection(location_type=format)
+        op = ops.CId_GetEditSelection(location_type=loc_type)
         self.client.run(op)
 
         return (op.response.in_time, op.response.out_time)
