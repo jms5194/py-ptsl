@@ -101,7 +101,7 @@ from .pt_202406_additions import GetSessionSystemDelayInfo
 
 # Pro Tools 2025.6
 
-from .get_edit_selection import CId_GetEditSelection
+from .get_edit_selection import Cid_GetEditSelection
 
 # Pro Tools 2025.10
 
