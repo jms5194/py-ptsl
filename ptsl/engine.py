@@ -30,7 +30,8 @@ from ptsl.PTSL_pb2 import SessionAudioFormat, BitDepth, FileLocation, \
     TrackFormat, TrackType, TrackTimebase, \
     AudioOperations, MediaDestination, MediaLocation, \
     SpotLocationType, Start, TimeCode, \
-    TimelineUpdateVideo, SelectionMode
+    TimelineUpdateVideo, SelectionMode, \
+    TimelineLocationType, TLType_TimeCode
 
 
 @contextmanager
@@ -970,7 +971,7 @@ class Engine:
                                            enabled=new_state)
         self.client.run(op)
 
-    def get_edit_selection(self, format: TrackOffsetOptions = TimeCode
+    def get_edit_selection(self, format: TimelineLocationType = TLType_TimeCode
                                ) -> Tuple[str, str]:
         """
         Returns data about the current timeline selection.
