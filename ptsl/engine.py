@@ -978,7 +978,7 @@ class Engine:
 
         :returns: a Tuple of the In and Out time.
         """
-        op = ops.CId_GetEditSelection(1)
+        op = ops.CId_GetEditSelection(location_type=loc_type)
         self.client.run(op)
 
         return (op.response.in_time, op.response.out_time)
