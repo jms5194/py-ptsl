@@ -48,11 +48,11 @@ To begin, type `connect`.
 
     def do_sinfo(self, _):
         'Print info about the open session: SINFO'
-        r = self.run_command_on_session(pt.GetSessionName, {})
+        r = self.run_command_on_session(pt.CId_GetSessionName, {})
 
         assert r, "Failed to receive a response"
         session_name = r['session_name']
-        r = self.run_command_on_session(pt.GetSessionIDs, {})
+        r = self.run_command_on_session(pt.CId_GetSessionIDs, {})
         assert r
         print(f"Connected to Pro Tools session \"{session_name}\"")
         print(f"Session origin ID: {r['origin_id']}")
@@ -87,7 +87,7 @@ To begin, type `connect`.
                         'track_timebase': 'TTB_Samples',
                         'insertion_point_position': 'TIPoint_Unknown',
                         }
-        self.run_command_on_session(pt.CreateNewTracks, command_args)
+        self.run_command_on_session(pt.CId_CreateNewTracks, command_args)
 
     def do_locate(self, args):
         'Locate to a given time: LOCATE time'
@@ -96,7 +96,7 @@ To begin, type `connect`.
                         'in_time': time,
                         'out_time': time,
                         }
-        self.run_command_on_session(pt.SetTimelineSelection, command_args)
+        self.run_command_on_session(pt.CId_SetTimelineSelection, command_args)
 
     def do_newmemloc(self, args):
         'Create a new marker memory location: NEWMEMLOC start-time'
@@ -118,7 +118,7 @@ To begin, type `connect`.
                         'location': 'MLC_MainRuler'
                         }
 
-        self.run_command_on_session(pt.CreateMemoryLocation, command_args)
+        self.run_command_on_session(pt.CId_CreateMemoryLocation, command_args)
 
     def do_play(self, _):
         'Toggle the play state of the transport: PLAY'
@@ -132,32 +132,32 @@ To begin, type `connect`.
 
     def do_geteditmode(self, _):
         'Get the edit mode of the session:'
-        r = self.run_command_on_session(pt.GetEditMode, {})
+        r = self.run_command_on_session(pt.CId_GetEditMode, {})
         print(f"Edit mode: {r['current_setting']}")
 
     def do_seteditmode(self, args):
         'Set the edit mode of the session:'
         command_args = {'edit_mode': args.strip()}
-        self.run_command_on_session(pt.SetEditMode, command_args)
+        self.run_command_on_session(pt.CId_SetEditMode, command_args)
 
     def do_getedittool(self, _):
         'Get the edit tool of the session:'
-        r = self.run_command_on_session(pt.GetEditTool, {})
+        r = self.run_command_on_session(pt.CId_GetEditTool, {})
         print(f"Edit tool: {r['current_setting']}")
 
     def do_setedittool(self, args):
         'Set the edit tool of the session:'
         command_args = {'edit_tool': args.strip()}
-        self.run_command_on_session(pt.SetEditTool, command_args)
+        self.run_command_on_session(pt.CId_SetEditTool, command_args)
 
     def do_recallzoompreset(self, args):
         'Recall a zoom preset in Pro Tools:'
         command_args = {'zoom_preset': int(args.strip())}
-        self.run_command_on_session(pt.RecallZoomPreset, command_args)
+        self.run_command_on_session(pt.CId_RecallZoomPreset, command_args)
 
     def do_getsessionids(self, _):
         'Get the originId, instanceId and parentId of the current opened session'
-        r = self.run_command_on_session(pt.GetSessionIDs, {})
+        r = self.run_command_on_session(pt.CId_GetSessionIDs, {})
         print(f"Origin ID: {r['origin_id']}")
         print(f"Instance ID: {r['instance_id']}")
         print(f"Parent ID: {r['parent_id']}")
@@ -165,35 +165,35 @@ To begin, type `connect`.
     def do_selectmemorylocation(self, args):
         'Select a memory location in the timeline:'
         command_args = {'number': int(args.strip())}
-        self.run_command_on_session(pt.SelectMemoryLocation, command_args)
+        self.run_command_on_session(pt.CId_SelectMemoryLocation, command_args)
 
     def do_mutetracks(self, args):
         'Mute one or more tracks by their track names, enclosed in quotations'
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled' : True
                         }
-        self.run_command_on_session(pt.SetTrackMuteState, command_args)
+        self.run_command_on_session(pt.CId_SetTrackMuteState, command_args)
 
     def do_unmutetracks(self, args):
         'Unmute one or more tracks by their track names, enclosed in quotations'
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled' : False
                         }
-        self.run_command_on_session(pt.SetTrackMuteState, command_args)
+        self.run_command_on_session(pt.CId_SetTrackMuteState, command_args)
 
     def do_solotracks(self, args):
         'Solo one or more tracks by their track names, enclosed in quotations'
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled' : True
                         }
-        self.run_command_on_session(pt.SetTrackSoloState, command_args)
+        self.run_command_on_session(pt.CId_SetTrackSoloState, command_args)
 
     def do_unsolotracks(self, args):
         'Unsolo one or more tracks by their track names, enclosed in quotations'
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled' : False
                         }
-        self.run_command_on_session(pt.SetTrackSoloState, command_args)
+        self.run_command_on_session(pt.CId_SetTrackSoloState, command_args)
 
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
