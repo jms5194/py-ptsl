@@ -987,7 +987,7 @@ class Engine:
         self.client.run(op)
 
     # PT 2023.12
-    # TODO add ImportVideo, SetTrackSoloState
+    # TODO add ImportVideo
     # TODO add SetTrackSoloSafe, SetTrackRecordSafeEnableState
     # TODO add SetTrackInputMonitorState, SetTrackSmartDspState, SetTrackHiddenState, SetTrackInactiveState
     # TODO add SetTrackFrozenState, SetTrackOnlineState, SetTrackOpenState
@@ -1011,6 +1011,13 @@ class Engine:
         Sets the solo state of one or more tracks (not including video or master tracks)
         """
         op = ops.CId_SetTrackSoloState(track_names=track_names, enabled=new_state)
+        self.client.run(op)
+
+    def set_track_solo_safe_state(self, track_names: List[str], new_state: bool) -> None:
+        """
+        Sets the solo state of one or more tracks (not including video or master tracks)
+        """
+        op = ops.CId_SetTrackSoloSafeState(track_names=track_names, enabled=new_state)
         self.client.run(op)
 
     def set_track_record_enable(self, track_names: List[str], new_state: bool

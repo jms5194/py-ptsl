@@ -182,18 +182,32 @@ To begin, type `connect`.
         self.run_command_on_session(pt.CId_SetTrackMuteState, command_args)
 
     def do_solotracks(self, args):
-        'Solo one or more tracks by their track names, enclosed in quotations'
+        'Solo one or more tracks by their track names, enclosed in quotations.'
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled' : True
                         }
         self.run_command_on_session(pt.CId_SetTrackSoloState, command_args)
 
     def do_unsolotracks(self, args):
-        'Unsolo one or more tracks by their track names, enclosed in quotations'
+        'Unsolo one or more tracks by their track names, enclosed in quotations.'
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled' : False
                         }
         self.run_command_on_session(pt.CId_SetTrackSoloState, command_args)
+
+    def do_solosafetracks(self, args):
+        'Solo safe one or more tracks by their track names, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled' : True
+                        }
+        self.run_command_on_session(pt.CId_SetTrackSoloSafeState, command_args)
+
+    def do_unsolosafetracks(self, args):
+        'Unsolo safe one or more tracks by their track names, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled' : False
+                        }
+        self.run_command_on_session(pt.CId_SetTrackSoloSafeState, command_args)
 
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
