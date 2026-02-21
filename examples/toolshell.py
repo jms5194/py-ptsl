@@ -155,6 +155,13 @@ To begin, type `connect`.
         command_args = {'zoom_preset': int(args.strip())}
         self.run_command_on_session(pt.RecallZoomPreset, command_args)
 
+    def do_getsessionid(self, _):
+        'Get the originId, instanceId and parentId of the current opened session'
+        r = self.run_command_on_session(pt.GetSessionIDs, {})
+        print(f"Origin ID: {r['origin_id']}")
+        print(f"Instance ID: {r['instance_id']}")
+        print(f"Parent ID: {r['parent_id']}")
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Tooshell quitting...")

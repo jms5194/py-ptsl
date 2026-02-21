@@ -34,6 +34,8 @@ from ptsl.PTSL_pb2 import SessionAudioFormat, BitDepth, FileLocation, \
     TimelineLocationType, TLType_TimeCode, \
     EditMode, EditTool
 
+import json
+
 
 @contextmanager
 def open_engine(*args, **kwargs):
@@ -393,18 +395,6 @@ class Engine:
             color_index=color_index
         )
         self.client.run(op)
-
-    def get_edit_mode(self):
-        """
-        :returns: The current edit mode and options:
-        """
-        op = ops.CId_GetEditMode()
-        self.client.run(op)
-        mode = op.response.current_setting
-        options = op.response.possible_settings
-        response = {"current_mode" : mode, "possible_settings" : options}
-
-        return response
 
     def edit_memory_location(self, location_number: int,
                              name: str,
@@ -817,51 +807,6 @@ class Engine:
         op = ops.CId_SetSessionVideoRatePullSettings(video_rate_pull=pull_rate)
         self.client.run(op)
 
-    def set_timeline_selection(self,
-                               in_time: Optional[str],
-                               play_start_marker_time: Optional[str] = None,
-                               out_time: Optional[str] = None,
-                               pre_roll_start_time: Optional[str] = None,
-                               post_roll_stop_time: Optional[str] = None,
-                               pre_roll_enabled: Optional[TripleBool] = None,
-                               update_video_to:
-                               Optional[TimelineUpdateVideo] = None,
-                               propagate_to_satellites:
-                               Optional[TripleBool] = None
-                               ):
-        """
-        Set Selection at Timecode
-        """
-        op = ops.CId_SetTimelineSelection(
-            play_start_marker_time=play_start_marker_time,
-            in_time=in_time,
-            out_time=out_time,
-            pre_roll_start_time=pre_roll_start_time,
-            post_roll_stop_time=post_roll_stop_time,
-            pre_roll_enabled=pre_roll_enabled,
-            update_video_to=update_video_to,
-            propagate_to_satellites=propagate_to_satellites
-        )
-        self.client.run(op)
-
-    def create_new_tracks(self,
-                          number_of_tracks: Optional[int] = None,
-                          track_name: Optional[str] = None,
-                          track_format: Optional[TrackFormat] = None,
-                          track_type: Optional[TrackType] = None,
-                          track_timebase: Optional[TrackTimebase] = None
-                          ):
-        """
-        Create new Tracks
-        """
-        op = ops.CId_CreateNewTracks(number_of_tracks=number_of_tracks,
-                                 track_name=track_name,
-                                 track_format=track_format,
-                                 track_type=track_type,
-                                 track_timebase=track_timebase
-                                 )
-        self.client.run(op)
-
     def cut(self, special: Optional['AutomationDataOptions'] = None):
         """
         Execute an Edit > Cut.
@@ -922,43 +867,24 @@ class Engine:
         self.client.run(ops.CId_RefreshAllModifiedAudioFiles())
 
     # PT 2023.9
-    # TODO add remaining new methods, add proper docstrings, expose
-    # remaining parameters
-    # CreateNewTracks
-    # GetEditModeOptions, SetEditModeOptions
+    # TODO add GetEditModeOptions, SetEditModeOptions
 
-    def recall_zoom_preset(self, preset: int):
+    def create_new_tracks(self,
+                          number_of_tracks: Optional[int] = None,
+                          track_name: Optional[str] = None,
+                          track_format: Optional[TrackFormat] = None,
+                          track_type: Optional[TrackType] = None,
+                          track_timebase: Optional[TrackTimebase] = None
+                          ):
         """
-        Recall a zoom preset in Pro Tools.
+        Create new Tracks
         """
-        op = ops.CId_RecallZoomPreset(zoom_preset=preset)
-        self.client.run(op)
-
-    def get_edit_tool(self):
-        """
-        Gets the current Pro Tools Edit tool as well as the possible options
-        """
-        op = ops.CId_GetEditTool()
-        self.client.run(op)
-        mode = op.response.current_setting
-        options = op.response.possible_settings
-        response = {"current_setting": mode, "possible_settings": options}
-
-        return response
-
-    def set_edit_tool(self, tool: EditTool):
-        """
-        Sets the Pro Tools Edit Tool
-        """
-        op = ops.CId_SetEditTool(edit_tool=tool)
-        self.client.run(op)
-
-
-    def set_edit_mode(self, mode: EditMode):
-        """
-        Sets the Pro Tools Edit Mode
-        """
-        op = ops.CId_SetEditMode(edit_mode=mode)
+        op = ops.CId_CreateNewTracks(number_of_tracks=number_of_tracks,
+                                 track_name=track_name,
+                                 track_format=track_format,
+                                 track_type=track_type,
+                                 track_timebase=track_timebase
+                                 )
         self.client.run(op)
 
     def select_tracks_by_name(self, names: List[str],
@@ -970,6 +896,55 @@ class Engine:
             track_names=names, selection_mode=mode,
             pagination_request=pt.PaginationRequest(limit=1000, offset=0))
 
+        self.client.run(op)
+
+    def get_edit_mode(self):
+        """
+        Gets the current session edit mode as well as all possible options
+
+        :returns: A dictionary containing the current edit mode and all possible edit modes
+        """
+        op = ops.CId_GetEditMode()
+        self.client.run(op)
+        mode = op.response.current_setting
+        options = op.response.possible_settings
+        response = {"current_mode" : mode, "possible_settings" : options}
+
+        return response
+
+    def set_edit_mode(self, mode: EditMode):
+        """
+        Sets the current session edit mode
+        """
+        op = ops.CId_SetEditMode(edit_mode=mode)
+        self.client.run(op)
+
+    def get_edit_tool(self):
+        """
+        Gets the current session edit tool as well as all possible options
+
+        :returns: A dictionary containing the current edit tool and all possible edit tools
+        """
+        op = ops.CId_GetEditTool()
+        self.client.run(op)
+        mode = op.response.current_setting
+        options = op.response.possible_settings
+        response = {"current_setting": mode, "possible_settings": options}
+
+        return response
+
+    def set_edit_tool(self, tool: EditTool):
+        """
+        Sets the current session edit tool
+        """
+        op = ops.CId_SetEditTool(edit_tool=tool)
+        self.client.run(op)
+
+    def recall_zoom_preset(self, preset: int):
+        """
+        Recall a zoom preset in Pro Tools.
+        """
+        op = ops.CId_RecallZoomPreset(zoom_preset=preset)
         self.client.run(op)
 
     def get_timeline_selection(self, format: TrackOffsetOptions = TimeCode
@@ -984,6 +959,71 @@ class Engine:
 
         return (op.response.in_time, op.response.out_time)
 
+    def set_timeline_selection(self,
+                               in_time: Optional[str],
+                               play_start_marker_time: Optional[str] = None,
+                               out_time: Optional[str] = None,
+                               pre_roll_start_time: Optional[str] = None,
+                               post_roll_stop_time: Optional[str] = None,
+                               pre_roll_enabled: Optional[TripleBool] = None,
+                               update_video_to:
+                               Optional[TimelineUpdateVideo] = None,
+                               propagate_to_satellites:
+                               Optional[TripleBool] = None
+                               ):
+        """
+        Set Selection at Timecode
+        """
+        op = ops.CId_SetTimelineSelection(
+            play_start_marker_time=play_start_marker_time,
+            in_time=in_time,
+            out_time=out_time,
+            pre_roll_start_time=pre_roll_start_time,
+            post_roll_stop_time=post_roll_stop_time,
+            pre_roll_enabled=pre_roll_enabled,
+            update_video_to=update_video_to,
+            propagate_to_satellites=propagate_to_satellites
+        )
+        self.client.run(op)
+
+    # PT 2023.12
+    # TODO add ImportVideo, SelectMemoryLocation, SetTrackMuteState, SetTrackSoloState
+    # TODO add SetTrackSoloSafe, SetTrackRecordSafeEnableState
+    # TODO add SetTrackInputMonitorState, SetTrackSmartDspState, SetTrackHiddenState, SetTrackInactiveState
+    # TODO add SetTrackFrozenState, SetTrackOnlineState, SetTrackOpenState
+
+    def set_track_record_enable(self, track_names: List[str], new_state: bool
+                                ) -> None:
+        """
+        Sets the record enabled state of one or more tracks
+        """
+        op = ops.CId_SetTrackRecordEnableState(track_names=track_names,
+                                           enabled=new_state)
+        self.client.run(op)
+
+    # PT 2024.03
+
+    def get_session_ids(self):
+        """
+        Provides originId, instanceId, and parentId of the current opened session:
+
+        :returns: A dictionary containing the originId, instanceId, and parentId of the current opened session
+        """
+
+        op = ops.CId.GetSessionIds()
+        self.client.run(op)
+        session_id = json.loads(op.response)
+        return session_id
+
+    # PT 2024.06
+    # TODO add GetMemoryLocationsManageMode, SetMemoryLocationsManageMode
+    # TODO add SetMainCounterFormat, SetSubCounterFormat
+    # TODO add GetMainCounterFormat, GetSubCounterFormat
+    # TODO add Undo, Redo, UndoAll, RedoAll
+    # TODO add ClearUndoQueue, SetTrackDSPModeSafeState
+    # TODO add GroupClips, UngroupClips, UngroupAllClips, RegroupClips
+    # TODO add RepeatSelection, DuplicateSelection
+
     def get_system_delay(self) -> int:
         """
         Get the current system delay.
@@ -995,14 +1035,16 @@ class Engine:
 
         return op.response.samples
 
-    def set_track_record_enable(self, track_names: List[str], new_state: bool
-                                ) -> None:
-        """
-        Sets the record enabled state of one or more tracks
-        """
-        op = ops.CId_SetTrackRecordEnableState(track_names=track_names,
-                                           enabled=new_state)
-        self.client.run(op)
+    # PT 2024.10
+    # TODO add ClearAllMemoryLocations
+
+    # PT 2025.6
+    # TODO add GetTimeAsType, SubtractLocations
+    # TODO add AddLengthToLocation, SubtractPositions, AddLengthToPosition
+    # TODO add ImportAudioToClipList, SpotClipsByID, GetClipList
+    # TODO add GetMediaFileInfo, CreateAudioClips, GetExportMixSourceList
+    # TODO add GetMonitorOutputPath, BounceTrack, BeginScrub, EndScrub, ContinueScrub
+    # TODO add EnableCueProVideoPlugIn, UpdateVideo, EnableAPI, ExchangePublicKeys
 
     def get_edit_selection(self, loc_type: TimelineLocationType = TLType_TimeCode
                                ) -> Tuple[str, str]:
@@ -1015,3 +1057,11 @@ class Engine:
         self.client.run(op)
 
         return (op.response.in_time, op.response.out_time)
+
+    # PT 2025.10
+    # TODO add CreateSignalPath, SetTrackMainOutputAssignments, GetTrackControlInfo
+    # TODO add GetTrackControlBreakpoints, SetTrackControlBreakpoints
+    # TODO add InstallMenuHandler, UninstallMenuHandler
+    # TODO add SetTrackColor, GetTrackPlaylists, SetTrackTimebase, GetColorPalette
+    # TODO add DeleteTracks, GetPlaylistElements, WriteSelectedTranscriptionToJSONFile
+    # TODO add CreateBatchJob, GetBatchJobStatus, CompleteBatchJob, CancelBatchJob
