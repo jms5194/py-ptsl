@@ -130,12 +130,33 @@ To begin, type `connect`.
                 print("play failed, no session is currently open")
                 return False
 
+    def do_geteditmode(self, _):
+        'Get the edit mode of the session:'
+        r = self.run_command_on_session(pt.GetEditMode, {})
+        print(f"Edit mode: {r['edit_mode']}")
+
+    def do_seteditmode(self, args):
+        'Set the edit mode of the session:'
+        command_args = {'edit_mode': args.strip()}
+        self.run_command_on_session(pt.SetEditMode, command_args)
+
+    def do_getedittool(self, _):
+        'Get the edit tool of the session:'
+        r = self.run_command_on_session(pt.GetEditTool, {})
+        print(f"Edit tool: {r['edit_tool']}")
+
+    def do_setedittool(self, args):
+        'Set the edit tool of the session:'
+        command_args = {'edit_tool': args.strip()}
+        self.run_command_on_session(pt.SetEditTool, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Tooshell quitting...")
         if self.client:
             self.client.close()
         return True
+
 
 
 if __name__ == '__main__':
