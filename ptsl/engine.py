@@ -1010,7 +1010,7 @@ class Engine:
         """
         Sets the solo state of one or more tracks (not including video or master tracks)
         """
-        op = ops.CId.SetTrackSoloState(track_names=track_names, enabled=new_state)
+        op = ops.CId_SetTrackSoloState(track_names=track_names, enabled=new_state)
         self.client.run(op)
 
     def set_track_record_enable(self, track_names: List[str], new_state: bool
