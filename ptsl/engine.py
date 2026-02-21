@@ -402,8 +402,9 @@ class Engine:
         self.client.run(op)
         mode = op.response.current_setting
         options = op.response.possible_settings
+        response = {"current_mode" : mode, "possible_settings" : options}
 
-        return (mode, options)
+        return response
 
     def edit_memory_location(self, location_number: int,
                              name: str,
@@ -936,8 +937,9 @@ class Engine:
         self.client.run(op)
         mode = op.response.current_setting
         options = op.response.possible_settings
+        response = {"current_setting": mode, "possible_settings": options}
 
-        return (mode, options)
+        return response
 
     def set_edit_tool(self, tool: EditTool):
         """
