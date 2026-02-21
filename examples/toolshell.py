@@ -133,7 +133,7 @@ To begin, type `connect`.
     def do_geteditmode(self, _):
         'Get the edit mode of the session:'
         r = self.run_command_on_session(pt.GetEditMode, {})
-        print(f"Edit mode: {r['mode']}")
+        print(f"Edit mode: {r['current_setting']}")
 
     def do_seteditmode(self, args):
         'Set the edit mode of the session:'
