@@ -1,9 +1,9 @@
 from ptsl.ops import Operation
 
 
-class GetEditTool(Operation):
+class CId_GetEditTool(Operation):
     pass
 
 
-class SetEditTool(Operation):
+class CId_SetEditTool(Operation):
     pass

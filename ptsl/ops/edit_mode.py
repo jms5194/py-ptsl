@@ -1,17 +1,17 @@
 from ptsl.ops import Operation
 
 
-class GetEditMode(Operation):
+class CId_GetEditMode(Operation):
     pass
 
 
-class SetEditMode(Operation):
+class CId_SetEditMode(Operation):
     pass
 
 
-class GetEditModeOptions(Operation):
+class CId_GetEditModeOptions(Operation):
     pass
 
 
-class SetEditModeOptions(Operation):
+class CId_SetEditModeOptions(Operation):
     pass

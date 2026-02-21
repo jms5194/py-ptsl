@@ -1,77 +1,80 @@
 from ptsl.ops import Operation
 
 
-class GetMemoryLocationsManageMode(Operation):
+class CId_GetMemoryLocationsManageMode(Operation):
     pass
 
 
-class SetMemoryLocationsManageMode(Operation):
+class CId_SetMemoryLocationsManageMode(Operation):
     pass
 
 
-class SetMainCounterFormat(Operation):
+class CId_SetMainCounterFormat(Operation):
     pass
 
 
-class SetSubCounterFormat(Operation):
+class CId_SetSubCounterFormat(Operation):
     pass
 
 
-class GetMainCounterFormat(Operation):
+class CId_GetMainCounterFormat(Operation):
     pass
 
 
-class GetSubCounterFormat(Operation):
+class CId_GetSubCounterFormat(Operation):
     pass
 
 
-class Undo(Operation):
+class CId_Undo(Operation):
     pass
 
 
-class Redo(Operation):
+class CId_Redo(Operation):
     pass
 
 
-class UndoAll(Operation):
+class CId_UndoAll(Operation):
     pass
 
 
-class RedoAll(Operation):
+class CId_RedoAll(Operation):
     pass
 
 
-class ClearUndoQueue(Operation):
+class CId_ClearUndoQueue(Operation):
     pass
 
 
-class SetTrackDSPModeSafeState(Operation):
+class CId_SetTrackDSPModeSafeState(Operation):
     pass
 
 
-class GetSessionSystemDelayInfo(Operation):
+class CId_GetSessionSystemDelayInfo(Operation):
     pass
 
 
-class GroupClips(Operation):
+class CId_GroupClips(Operation):
     pass
 
 
-class UngroupClips(Operation):
+class CId_UngroupClips(Operation):
     pass
 
 
-class UngroupAllClips(Operation):
+class CId_UngroupAllClips(Operation):
     pass
 
 
-class RegroupClips(Operation):
+class CId_RegroupClips(Operation):
     pass
 
 
-class RepeatSelection(Operation):
+class CId_RepeatSelection(Operation):
     pass
 
 
-class DuplicateSelection(Operation):
+class CId_DuplicateSelection(Operation):
+    pass
+
+class CId_GetSessionSystemDelayInfo(Operation):
     pass

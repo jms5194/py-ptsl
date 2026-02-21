@@ -99,7 +99,7 @@ class Engine:
         :returns: The server's PTSL version number.
         :rtype: int
         """
-        op = ops.GetPTSLVersion()
+        op = ops.CId_GetPTSLVersion()
         self.client.run(op)
         assert isinstance(
             op.response, pt.GetPTSLVersionResponseBody), \
@@ -115,7 +115,7 @@ class Engine:
         .. note:: This method will succeed even if the client
             connection is not registered.
         """
-        self.client.run(ops.HostReadyCheck())
+        self.client.run(ops.CId_HostReadyCheck())
 
     def create_session(self,
                        name: str,
@@ -180,21 +180,21 @@ class Engine:
         """
         Open a session.
         """
-        op = ops.OpenSession(session_path=path)
+        op = ops.CId_OpenSession(session_path=path)
         self.client.run(op)
 
     def close_session(self, save_on_close: bool):
         """
         Close the currently-open session.
         """
-        op = ops.CloseSession(save_on_close=save_on_close)
+        op = ops.CId_CloseSession(save_on_close=save_on_close)
         self.client.run(op)
 
     def save_session(self):
         """
         Save the currently-open session.
         """
-        op = ops.SaveSession()
+        op = ops.CId_SaveSession()
         self.client.run(op)
 
     def save_session_as(self, path: str, name: str):
@@ -204,7 +204,7 @@ class Engine:
         :param str path: Path to the new session
         :param str name: New name for the session
         """
-        op = ops.SaveSessionAs(session_name=name, session_location=path)
+        op = ops.CId_SaveSessionAs(session_name=name, session_location=path)
         self.client.run(op)
 
     def export_session_as_text(self) -> ExportSessionTextBuilder:
@@ -247,7 +247,7 @@ class Engine:
                                   audio_location=audio_location,
                                   location_data=location_data
                                   )
-        op = ops.Import(import_type=1, audio_data=audio_data)
+        op = ops.CId_Import(import_type=1, audio_data=audio_data)
         self.client.run(op)
 
     def select_all_clips_on_track(self, track_name: str):
@@ -256,7 +256,7 @@ class Engine:
 
         :param str track_name: Name of the track to select all clips on.
         """
-        op = ops.SelectAllClipsOnTrack(track_name=track_name)
+        op = ops.CId_SelectAllClipsOnTrack(track_name=track_name)
         self.client.run(op)
 
     def extend_selection_to_target_tracks(self, tracks: List[str]):
@@ -266,14 +266,14 @@ class Engine:
         :param List[str] tracks: A list of track names to extend
             the selection to.
         """
-        op = ops.ExtendSelectionToTargetTracks(tracks_to_extend_to=tracks)
+        op = ops.CId_ExtendSelectionToTargetTracks(tracks_to_extend_to=tracks)
         self.client.run(op)
 
     def trim_to_selection(self):
         """
         Trim selected clips to the edit selection range.
         """
-        op = ops.TrimToSelection()
+        op = ops.CId_TrimToSelection()
         self.client.run(op)
 
     def create_batch_fades(self, preset_name: str, adjust_bounds: bool):
@@ -287,7 +287,7 @@ class Engine:
         rq = pt.CreateFadesBasedOnPresetRequestBody()
         rq.fade_preset_name = preset_name
         rq.auto_adjust_bounds = adjust_bounds
-        op = ops.CreateFadesBasedOnPreset()
+        op = ops.CId_CreateFadesBasedOnPreset()
         op.request = rq
         self.client.run(op)
 
@@ -298,7 +298,7 @@ class Engine:
         :param str old_name: The name of the track to rename.
         :param str new_name: The new name to give the track.
         """
-        op = ops.RenameTargetTrack(current_name=old_name,
+        op = ops.CId_RenameTargetTrack(current_name=old_name,
                                    new_name=new_name)
         self.client.run(op)
 
@@ -315,7 +315,7 @@ class Engine:
         :param CL_ClipLocation clip_location: Clip selection location,
             defaults to :attr:`~ptsl.PTSL_pb2.CL_ClipLocation.CL_Timeline`
         """
-        op = ops.RenameSelectedClip(clip_location=clip_location,
+        op = ops.CId_RenameSelectedClip(clip_location=clip_location,
                                     new_name=new_name,
                                     rename_file=rename_file)
 
@@ -327,7 +327,7 @@ class Engine:
         """
         Renames a named clip in the current session.
         """
-        op = ops.RenameTargetClip(clip_name=clip_name,
+        op = ops.CId_RenameTargetClip(clip_name=clip_name,
                                   new_name=new_name,
                                   rename_file=rename_file)
 
@@ -337,25 +337,25 @@ class Engine:
         """
         Toggle the play state.
         """
-        self.client.run(ops.TogglePlayState())
+        self.client.run(ops.CId_TogglePlayState())
 
     def toggle_record_enable(self):
         """
         Toggle record enable.
         """
-        self.client.run(ops.ToggleRecordEnable())
+        self.client.run(ops.CId_ToggleRecordEnable())
 
     def play_half_speed(self):
         """
         Play at half speed.
         """
-        self.client.run(ops.PlayHalfSpeed())
+        self.client.run(ops.CId_PlayHalfSpeed())
 
     def record_half_speed(self):
         """
         Record at half speed.
         """
-        self.client.run(ops.RecordHalfSpeed())
+        self.client.run(ops.CId_RecordHalfSpeed())
 
     def create_memory_location(
             self,
@@ -378,7 +378,7 @@ class Engine:
         if general_properties is None:
             general_properties = MemoryLocationProperties(
                 track_visibility=False)
-        op = ops.CreateMemoryLocation(
+        op = ops.CId_CreateMemoryLocation(
             number=memory_number,
             name=name,
             start_time=start_time,
@@ -397,11 +397,11 @@ class Engine:
         """
         :returns: The current edit mode and options:
         """
-        op = ops.GetEditMode()
+        op = ops.CId_GetEditMode()
         self.client.run(op)
         # mode = op.response.current_setting
 
-        op2 = ops.GetEditModeOptions()
+        op2 = ops.CId_GetEditModeOptions()
         self.client.run(op2)
         # options = op.response.edit_mode_options
 
@@ -426,7 +426,7 @@ class Engine:
         :param MemoryLocationProperties general_properties: Location properties
         :param str comments: Comment field
         """
-        op = ops.EditMemoryLocation(
+        op = ops.CId_EditMemoryLocation(
             number=location_number,
             name=name,
             start_time=start_time,
@@ -443,7 +443,7 @@ class Engine:
         """
         Get a list of all memory locations in currently-open session.
         """
-        op = ops.GetMemoryLocations(
+        op = ops.CId_GetMemoryLocations(
             pagination_request=pt.PaginationRequest(limit=1000, offset=0)
         )
         self.client.run(op)
@@ -453,7 +453,7 @@ class Engine:
         """
         Consolidate time selection.
         """
-        op = ops.ConsolidateClip()
+        op = ops.CId_ConsolidateClip()
         self.client.run(op)
 
     def export_clips_as_files(
@@ -489,7 +489,7 @@ class Engine:
         if ex_format is not None:
             rq.format = ex_format
 
-        op = ops.ExportClipsAsFiles()
+        op = ops.CId_ExportClipsAsFiles()
         op.request = rq
         self.client.run(op)
 
@@ -507,7 +507,7 @@ class Engine:
         """
         if filters is None:
             filters = [pt.All_Files]
-        op = ops.GetFileLocation(
+        op = ops.CId_GetFileLocation(
             pagination_request=pt.PaginationRequest(limit=1000, offset=0),
             file_filters=filters)
         self.client.run(op)
@@ -539,7 +539,7 @@ class Engine:
         :param EM_DolbyAtmosInfo dolby_atmos_info: Dolby Atmos output settings
         :param bool offline_bounce: Bounce offline option
         """
-        op = ops.ExportMix(
+        op = ops.CId_ExportMix(
             file_name=base_name,
             file_type=file_type,
             mix_source_list=sources,
@@ -555,7 +555,7 @@ class Engine:
         """
         Name of the current open session.
         """
-        op = ops.GetSessionName()
+        op = ops.CId_GetSessionName()
         self.client.run(op)
         return op.response.session_name
 
@@ -563,7 +563,7 @@ class Engine:
         """
         Path to the current open session.
         """
-        op = ops.GetSessionPath()
+        op = ops.CId_GetSessionPath()
         self.client.run(op)
         return op.response.session_path.path
 
@@ -571,7 +571,7 @@ class Engine:
         """
         Open session sample rate.
         """
-        op = ops.GetSessionSampleRate()
+        op = ops.CId_GetSessionSampleRate()
         self.client.run(op)
         map_dict = {
             pt.SR_192000: 192000,
@@ -587,12 +587,12 @@ class Engine:
         """
         Open session audio format.
         """
-        op = ops.GetSessionAudioFormat()
+        op = ops.CId_GetSessionAudioFormat()
         self.client.run(op)
         return op.response.current_setting
 
     def session_bit_depth(self) -> 'BitDepth':
-        op = ops.GetSessionBitDepth()
+        op = ops.CId_GetSessionBitDepth()
         self.client.run(op)
         return op.response.current_setting
 
@@ -600,7 +600,7 @@ class Engine:
         """
         Session audio file interleaved state.
         """
-        op = ops.GetSessionInterleavedState()
+        op = ops.CId_GetSessionInterleavedState()
         self.client.run(op)
         return op.response.current_setting
 
@@ -608,7 +608,7 @@ class Engine:
         """
         Session timecode rate.
         """
-        op = ops.GetSessionTimeCodeRate()
+        op = ops.CId_GetSessionTimeCodeRate()
         self.client.run(op)
         return op.response.current_setting
 
@@ -616,7 +616,7 @@ class Engine:
         """
         Session start time.
         """
-        op = ops.GetSessionStartTime()
+        op = ops.CId_GetSessionStartTime()
         self.client.run(op)
         return op.response.session_start_time
 
@@ -627,7 +627,7 @@ class Engine:
         :returns: Session length, as a string in the current
             time code format.
         """
-        op = ops.GetSessionLength()
+        op = ops.CId_GetSessionLength()
         self.client.run(op)
         return op.response.session_length
 
@@ -635,7 +635,7 @@ class Engine:
         """
         Session feet-frames rate.
         """
-        op = ops.GetSessionFeetFramesRate()
+        op = ops.CId_GetSessionFeetFramesRate()
         self.client.run(op)
         return op.response.current_setting
 
@@ -643,7 +643,7 @@ class Engine:
         """
         Audio pull setting of the currently-open session.
         """
-        op = ops.GetSessionAudioRatePullSettings()
+        op = ops.CId_GetSessionAudioRatePullSettings()
         self.client.run(op)
         return op.response.current_setting
 
@@ -651,7 +651,7 @@ class Engine:
         """
         Video pull setting of the currently-open session.
         """
-        op = ops.GetSessionVideoRatePullSettings()
+        op = ops.CId_GetSessionVideoRatePullSettings()
         self.client.run(op)
         return op.response.current_setting
 
@@ -659,7 +659,7 @@ class Engine:
         """
         Current transport state.
         """
-        op = ops.GetTransportState()
+        op = ops.CId_GetTransportState()
         self.client.run(op)
         return pt.TransportState.Name(op.response.current_setting)
 
@@ -667,7 +667,7 @@ class Engine:
         """
         Transport record-arm state.
         """
-        op = ops.GetTransportArmed()
+        op = ops.CId_GetTransportArmed()
         self.client.run(op)
         return op.response.is_transport_armed
 
@@ -677,7 +677,7 @@ class Engine:
 
         :returns: A Tuple of (`is_normal`, `is_loop`, `is_dynamic_transport`)
         """
-        op = ops.GetPlaybackMode()
+        op = ops.CId_GetPlaybackMode()
         self.client.run(op)
         return (pt.PM_Normal in op.response.current_settings,
                 pt.PM_Loop in op.response.current_settings,
@@ -687,7 +687,7 @@ class Engine:
         """
         Transport's current record mode.
         """
-        op = ops.GetRecordMode()
+        op = ops.CId_GetRecordMode()
         self.client.run(op)
         return op.response.current_setting
 
@@ -705,7 +705,7 @@ class Engine:
             filters = [pt.TrackListInvertibleFilter(filter=pt.All,
                                                     is_inverted=False)]
 
-        op = ops.GetTrackList(
+        op = ops.CId_GetTrackList(
             track_filter_list=filters,
             pagination_request=pt.PaginationRequest(limit=1000, offset=0)
         )
@@ -718,7 +718,7 @@ class Engine:
         """
         Set the playback mode.
         """
-        op = ops.SetPlaybackMode(playback_mode=new_mode)
+        op = ops.CId_SetPlaybackMode(playback_mode=new_mode)
         self.client.run(op)
 
     def set_record_mode(
@@ -728,7 +728,7 @@ class Engine:
         """
         Set the record mode.
         """
-        op = ops.SetRecordMode(
+        op = ops.CId_SetRecordMode(
             record_mode=new_mode,
             record_arm_transport=record_arm_transport
         )
@@ -738,14 +738,14 @@ class Engine:
         """
         Set session bit depth.
         """
-        op = ops.SetSessionBitDepth(bit_depth=new_bit_depth)
+        op = ops.CId_SetSessionBitDepth(bit_depth=new_bit_depth)
         self.client.run(op)
 
     def set_session_audio_format(self, new_audio_format: 'SessionAudioFormat'):
         """
         Set session audio format.
         """
-        op = ops.SetSessionAudioFormat(audio_format=new_audio_format)
+        op = ops.CId_SetSessionAudioFormat(audio_format=new_audio_format)
         self.client.run(op)
 
     def set_session_start_time(
@@ -762,7 +762,7 @@ class Engine:
         :param maintain_relative: If `True`, clips will retain their time
             position relative to the beginning of the session.
         """
-        op = ops.SetSessionStartTime(
+        op = ops.CId_SetSessionStartTime(
             session_start_time=new_start,
             track_offset_opts=track_offset_opts,
             maintain_relative_position=maintain_relative
@@ -778,42 +778,42 @@ class Engine:
             than "06:00:00:00", the PTSL server will reject the
             change and return an error otherwise.
         """
-        op = ops.SetSessionLength(session_length=new_length)
+        op = ops.CId_SetSessionLength(session_length=new_length)
         self.client.run(op)
 
     def set_session_interleaved_state(self, new_state: bool):
         """
         Set session interleaved state.
         """
-        op = ops.SetSessionInterleavedState(interleaved_state=new_state)
+        op = ops.CId_SetSessionInterleavedState(interleaved_state=new_state)
         self.client.run(op)
 
     def set_session_time_code_rate(self, tc_rate: 'SessionTimeCodeRate'):
         """
         Set session timecode rate.
         """
-        op = ops.SetSessionTimeCodeRate(time_code_rate=tc_rate)
+        op = ops.CId_SetSessionTimeCodeRate(time_code_rate=tc_rate)
         self.client.run(op)
 
     def set_session_feet_frames_rate(self, ff_rate: 'SessionFeetFramesRate'):
         """
         Set session feet+frames rate.
         """
-        op = ops.SetSessionFeetFramesRate(feet_frames_rate=ff_rate)
+        op = ops.CId_SetSessionFeetFramesRate(feet_frames_rate=ff_rate)
         self.client.run(op)
 
     def set_session_audio_rate_pull(self, pull_rate: 'SessionRatePull'):
         """
         Set session audio rate pull.
         """
-        op = ops.SetSessionAudioRatePullSettings(audio_rate_pull=pull_rate)
+        op = ops.CId_SetSessionAudioRatePullSettings(audio_rate_pull=pull_rate)
         self.client.run(op)
 
     def set_session_video_rate_pull(self, pull_rate: 'SessionRatePull'):
         """
         Set session video rate pull.
         """
-        op = ops.SetSessionVideoRatePullSettings(video_rate_pull=pull_rate)
+        op = ops.CId_SetSessionVideoRatePullSettings(video_rate_pull=pull_rate)
         self.client.run(op)
 
     def set_timeline_selection(self,
@@ -831,7 +831,7 @@ class Engine:
         """
         Set Selection at Timecode
         """
-        op = ops.SetTimelineSelection(
+        op = ops.CId_SetTimelineSelection(
             play_start_marker_time=play_start_marker_time,
             in_time=in_time,
             out_time=out_time,
@@ -853,7 +853,7 @@ class Engine:
         """
         Create new Tracks
         """
-        op = ops.CreateNewTracks(number_of_tracks=number_of_tracks,
+        op = ops.CId_CreateNewTracks(number_of_tracks=number_of_tracks,
                                  track_name=track_name,
                                  track_format=track_format,
                                  track_type=track_type,
@@ -866,9 +866,9 @@ class Engine:
         Execute an Edit > Cut.
         """
         if special is not None:
-            op = ops.CutSpecial(automation_data_option=special)
+            op = ops.CId_CutSpecial(automation_data_option=special)
         else:
-            op = ops.Cut()
+            op = ops.CId_Cut()
 
         self.client.run(op)
 
@@ -877,9 +877,9 @@ class Engine:
         Execute an Edit > Copy.
         """
         if special is not None:
-            op = ops.CopySpecial(automation_data_option=special)
+            op = ops.CId_CopySpecial(automation_data_option=special)
         else:
-            op = ops.Copy()
+            op = ops.CId_Copy()
 
         self.client.run(op)
 
@@ -888,9 +888,9 @@ class Engine:
         Execute an Edit > Paste.
         """
         if special is not None:
-            op = ops.PasteSpecial(paste_special_option=special)
+            op = ops.CId_PasteSpecial(paste_special_option=special)
         else:
-            op = ops.Paste()
+            op = ops.CId_Paste()
 
         self.client.run(op)
 
@@ -899,9 +899,9 @@ class Engine:
         Execute an Edit > Clear.
         """
         if special is not None:
-            op = ops.ClearSpecial(automation_data_option=special)
+            op = ops.CId_ClearSpecial(automation_data_option=special)
         else:
-            op = ops.Clear()
+            op = ops.CId_Clear()
 
         self.client.run(op)
 
@@ -911,14 +911,14 @@ class Engine:
 
         :param files: A list of files to refresh.
         """
-        op = ops.RefreshAllModifiedAudioFiles(file_list=files)
+        op = ops.CId_RefreshAllModifiedAudioFiles(file_list=files)
         self.client.run(op)
 
     def refresh_all_modified_audio_files(self):
         """
         Refreshes all modified audio files.
         """
-        self.client.run(ops.RefreshAllModifiedAudioFiles())
+        self.client.run(ops.CId_RefreshAllModifiedAudioFiles())
 
     # PT 2023.9
     # TODO add remaining new methods, add proper docstrings, expose
@@ -933,7 +933,7 @@ class Engine:
         """
         Selects all tracks matching any of the passed names literally.
         """
-        op = ops.SelectTracksByName(
+        op = ops.CId_SelectTracksByName(
             track_names=names, selection_mode=mode,
             pagination_request=pt.PaginationRequest(limit=1000, offset=0))
 
@@ -946,7 +946,7 @@ class Engine:
 
         :returns: a Tuple of the In and Out time.
         """
-        op = ops.GetTimelineSelection(time_scale=format)
+        op = ops.CId_GetTimelineSelection(time_scale=format)
         self.client.run(op)
 
         return (op.response.in_time, op.response.out_time)
@@ -957,7 +957,7 @@ class Engine:
 
         :returns: the delay in samples.
         """
-        op = ops.GetSessionSystemDelayInfo()
+        op = ops.CId_GetSessionSystemDelayInfo()
         self.client.run(op)
 
         return op.response.samples
@@ -967,7 +967,7 @@ class Engine:
         """
         Sets the record enabled state of one or more tracks
         """
-        op = ops.SetTrackRecordEnableState(track_names=track_names,
+        op = ops.CId_SetTrackRecordEnableState(track_names=track_names,
                                            enabled=new_state)
         self.client.run(op)
 
