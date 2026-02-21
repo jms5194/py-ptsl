@@ -912,7 +912,7 @@ class Engine:
 
         return response
 
-    def set_edit_mode(self, mode: EditMode):
+    def set_edit_mode(self, mode: EditMode) -> None:
         """
         Sets the current session edit mode
         """
@@ -933,14 +933,14 @@ class Engine:
 
         return response
 
-    def set_edit_tool(self, tool: EditTool):
+    def set_edit_tool(self, tool: EditTool) -> None:
         """
         Sets the current session edit tool
         """
         op = ops.CId_SetEditTool(edit_tool=tool)
         self.client.run(op)
 
-    def recall_zoom_preset(self, preset: int):
+    def recall_zoom_preset(self, preset: int) -> None:
         """
         Recall a zoom preset in Pro Tools.
         """
@@ -970,7 +970,7 @@ class Engine:
                                Optional[TimelineUpdateVideo] = None,
                                propagate_to_satellites:
                                Optional[TripleBool] = None
-                               ):
+                               ) -> None:
         """
         Set Selection at Timecode
         """
@@ -987,16 +987,23 @@ class Engine:
         self.client.run(op)
 
     # PT 2023.12
-    # TODO add ImportVideo, SelectMemoryLocation, SetTrackMuteState, SetTrackSoloState
+    # TODO add ImportVideo, SetTrackMuteState, SetTrackSoloState
     # TODO add SetTrackSoloSafe, SetTrackRecordSafeEnableState
     # TODO add SetTrackInputMonitorState, SetTrackSmartDspState, SetTrackHiddenState, SetTrackInactiveState
     # TODO add SetTrackFrozenState, SetTrackOnlineState, SetTrackOpenState
 
-    def select_memory_location(self, mem_loc_id: int):
+    def select_memory_location(self, mem_loc_id: int) -> None:
         """
         Select a memory location given an index value
         """
         op = ops.CId_SelectMemoryLocation(number=mem_loc_id)
+        self.client.run(op)
+
+    def set_track_mute_state(self, track_names: List[str], new_state: bool) -> None:
+        """
+         Sets the mute state of one or more tracks (not including video or master tracks)
+        """
+        op = ops.CId_SetTrackMuteState(track_names=track_names, enabled=new_state)
         self.client.run(op)
 
     def set_track_record_enable(self, track_names: List[str], new_state: bool

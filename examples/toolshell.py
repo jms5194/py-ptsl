@@ -167,9 +167,23 @@ To begin, type `connect`.
         command_args = {'number': int(args.strip())}
         self.run_command_on_session(pt.SelectMemoryLocation, command_args)
 
+    def do_mutetracks(self, args):
+        'Mute one or more tracks by their track names, enclosed in quotations'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled' : True
+                        }
+        self.run_command_on_session(pt.SetTrackMuteState, command_args)
+
+    def do_unmutetracks(self, args):
+        'Unmute one or more tracks by their track names, enclosed in quotations'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled' : False
+                        }
+        self.run_command_on_session(pt.SetTrackMuteState, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
-        print("Tooshell quitting...")
+        print("Toolshell quitting...")
         if self.client:
             self.client.close()
         return True
