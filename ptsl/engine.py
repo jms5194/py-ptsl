@@ -31,7 +31,8 @@ from ptsl.PTSL_pb2 import SessionAudioFormat, BitDepth, FileLocation, \
     AudioOperations, MediaDestination, MediaLocation, \
     SpotLocationType, Start, TimeCode, \
     TimelineUpdateVideo, SelectionMode, \
-    TimelineLocationType, TLType_TimeCode
+    TimelineLocationType, TLType_TimeCode, \
+    EditMode, EditTool
 
 
 @contextmanager
@@ -399,11 +400,13 @@ class Engine:
         """
         op = ops.CId_GetEditMode()
         self.client.run(op)
-        # mode = op.response.current_setting
+        mode = op.response.current_setting
 
         op2 = ops.CId_GetEditModeOptions()
         self.client.run(op2)
-        # options = op.response.edit_mode_options
+        options = op.response.edit_mode_options
+
+        return (mode, options)
 
     def edit_memory_location(self, location_number: int,
                              name: str,
@@ -924,9 +927,30 @@ class Engine:
     # TODO add remaining new methods, add proper docstrings, expose
     # remaining parameters
     # CreateNewTracks
-    # GetEditMode, SetEditMode, GetEditModeOptions, SetEditModeOptions
+    # GetEditModeOptions, SetEditModeOptions
     # GetEditTool, SetEditTool
     # RecallZoomPreset
+
+    def get_edit_tool(self):
+        """
+        Gets the current Pro Tools Edit tool as well as the possible options
+        """
+        pass
+
+    def set_edit_tool(self, tool: EditTool):
+        """
+        Sets the Pro Tools Edit Tool
+        """
+        op = ops.CId_SetEditTool(edit_tool=tool)
+        self.client.run(op)
+
+
+    def set_edit_mode(self, mode: EditMode):
+        """
+        Sets the Pro Tools Edit Mode
+        """
+        op = ops.CId_SetEditMode(edit_mode=mode)
+        self.client.run(op)
 
     def select_tracks_by_name(self, names: List[str],
                               mode: Optional['SelectionMode'] = pt.SM_Replace):

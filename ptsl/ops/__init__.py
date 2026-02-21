@@ -96,6 +96,10 @@ from .edit_mode import CId_GetEditMode, CId_SetEditMode, CId_GetEditModeOptions,
 from .edit_tool import CId_GetEditTool, CId_SetEditTool
 from .zoom_preset import CId_RecallZoomPreset
 from .timeline_selection import CId_SetTimelineSelection, CId_GetTimelineSelection
+from .set_edit_mode import CId_SetEditMode
+from .get_edit_mode import CId_GetEditMode
+from .set_edit_tool import CId_SetEditTool
+from .get_edit_tool import CId_GetEditTool
 
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 
