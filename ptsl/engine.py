@@ -988,7 +988,7 @@ class Engine:
 
     # PT 2023.12
     # TODO add ImportVideo
-    # TODO add SetTrackInputMonitorState, SetTrackSmartDspState, SetTrackHiddenState, SetTrackInactiveState
+    # TODO add SetTrackSmartDspState, SetTrackHiddenState, SetTrackInactiveState
     # TODO add SetTrackFrozenState, SetTrackOnlineState, SetTrackOpenState
 
     def select_memory_location(self, mem_loc_id: int) -> None:
@@ -998,28 +998,28 @@ class Engine:
         op = ops.CId_SelectMemoryLocation(number=mem_loc_id)
         self.client.run(op)
 
-    def set_track_mute(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_mute_state(self, track_names: List[str], new_state: bool) -> None:
         """
          Sets the mute state of one or more tracks (not including video or master tracks)
         """
         op = ops.CId_SetTrackMuteState(track_names=track_names, enabled=new_state)
         self.client.run(op)
 
-    def set_track_solo(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_solo_state(self, track_names: List[str], new_state: bool) -> None:
         """
         Sets the solo state of one or more tracks (not including video or master tracks)
         """
         op = ops.CId_SetTrackSoloState(track_names=track_names, enabled=new_state)
         self.client.run(op)
 
-    def set_track_solo_safe(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_solo_safe_state(self, track_names: List[str], new_state: bool) -> None:
         """
         Sets the solo state of one or more tracks (not including video or master tracks)
         """
         op = ops.CId_SetTrackSoloSafeState(track_names=track_names, enabled=new_state)
         self.client.run(op)
 
-    def set_track_record_enable(self, track_names: List[str], new_state: bool
+    def set_track_record_enable_state(self, track_names: List[str], new_state: bool
                                 ) -> None:
         """
         Sets the record enabled state of one or more tracks
@@ -1028,7 +1028,7 @@ class Engine:
                                            enabled=new_state)
         self.client.run(op)
 
-    def set_track_record_safe_enable(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_record_safe_enable_state(self, track_names: List[str], new_state: bool) -> None:
         """
         Sets the record safe enabled state of one or more tracks
         """
@@ -1036,11 +1036,19 @@ class Engine:
                                                enabled=new_state)
         self.client.run(op)
 
-    def set_track_input_monitor(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_input_monitor_state(self, track_names: List[str], new_state: bool) -> None:
         """
         Sets the input monitor enabled state of one or more tracks
         """
         op = ops.CId_SetTrackInputMonitorState(track_names=track_names,
+                                               enabled=new_state)
+        self.client.run(op)
+
+    def set_track_smart_dsp_state(self, track_names: List[str], new_state: bool) -> None:
+        """
+        Sets the input monitor enabled state of one or more tracks
+        """
+        op = ops.CId_SetTrackSmartDspState(track_names=track_names,
                                                enabled=new_state)
         self.client.run(op)
 
