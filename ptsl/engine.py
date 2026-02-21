@@ -401,10 +401,7 @@ class Engine:
         op = ops.CId_GetEditMode()
         self.client.run(op)
         mode = op.response.current_setting
-
-        op2 = ops.CId_GetEditModeOptions()
-        self.client.run(op2)
-        options = op.response.edit_mode_options
+        options = op.response.possible_settings
 
         return (mode, options)
 
@@ -935,7 +932,12 @@ class Engine:
         """
         Gets the current Pro Tools Edit tool as well as the possible options
         """
-        pass
+        op = ops.CId_GetEditTool()
+        self.client.run(op)
+        mode = op.response.current_setting
+        options = op.response.possible_settings
+
+        return (mode, options)
 
     def set_edit_tool(self, tool: EditTool):
         """
