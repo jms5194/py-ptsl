@@ -926,8 +926,13 @@ class Engine:
     # remaining parameters
     # CreateNewTracks
     # GetEditModeOptions, SetEditModeOptions
-    # GetEditTool, SetEditTool
-    # RecallZoomPreset
+
+    def recall_zoom_preset(self, preset: int):
+        """
+        Recall a zoom preset in Pro Tools.
+        """
+        op = ops.CId_RecallZoomPreset(zoom_preset=preset)
+        self.client.run(op)
 
     def get_edit_tool(self):
         """

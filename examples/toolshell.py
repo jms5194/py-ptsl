@@ -150,6 +150,11 @@ To begin, type `connect`.
         command_args = {'edit_tool': args.strip()}
         self.run_command_on_session(pt.SetEditTool, command_args)
 
+    def do_recallzoompreset(self, args):
+        'Recall a zoom preset in Pro Tools:'
+        command_args = {'zoom_preset': int(args.strip())}
+        self.run_command_on_session(pt.RecallZoomPreset, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Tooshell quitting...")

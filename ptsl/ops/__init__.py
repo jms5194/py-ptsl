@@ -93,7 +93,6 @@ from .create_new_tracks import CId_CreateNewTracks
 from .select_tracks import CId_SelectTracksByName
 from .edit_mode import CId_GetEditMode, CId_SetEditMode, CId_GetEditModeOptions, \
         CId_SetEditModeOptions
-from .edit_tool import CId_GetEditTool, CId_SetEditTool
 from .zoom_preset import CId_RecallZoomPreset
 from .timeline_selection import CId_SetTimelineSelection, CId_GetTimelineSelection
 from .set_edit_mode import CId_SetEditMode
