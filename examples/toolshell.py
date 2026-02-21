@@ -165,7 +165,7 @@ To begin, type `connect`.
     def do_selectmemorylocation(self, args):
         'Select a memory location in the timeline:'
         command_args = {'mem_loc_id': int(args.strip())}
-        self.run_command_on_session(pt.SetTimelineSelection, command_args)
+        self.run_command_on_session(pt.SelectMemoryLocation, command_args)
 
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
