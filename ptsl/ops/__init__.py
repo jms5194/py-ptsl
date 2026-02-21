@@ -104,6 +104,7 @@ from .get_edit_tool import CId_GetEditTool
 
 from .select_memory_location import CId_SelectMemoryLocation
 from .set_track_mute_state import CId_SetTrackMuteState
+from .set_track_solo_state import CId_SetTrackSoloState
 
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 

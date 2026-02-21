@@ -181,6 +181,20 @@ To begin, type `connect`.
                         }
         self.run_command_on_session(pt.SetTrackMuteState, command_args)
 
+    def do_solotracks(self, args):
+        'Solo one or more tracks by their track names, enclosed in quotations'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled' : True
+                        }
+        self.run_command_on_session(pt.SetTrackSoloState, command_args)
+
+    def do_unsolotracks(self, args):
+        'Unsolo one or more tracks by their track names, enclosed in quotations'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled' : False
+                        }
+        self.run_command_on_session(pt.SetTrackSoloState, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Toolshell quitting...")
