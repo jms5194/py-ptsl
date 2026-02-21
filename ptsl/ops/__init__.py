@@ -100,6 +100,10 @@ from .get_edit_mode import CId_GetEditMode
 from .set_edit_tool import CId_SetEditTool
 from .get_edit_tool import CId_GetEditTool
 
+# Pro Tools 2023.12
+
+from .select_memory_location import CId_SelectMemoryLocation
+
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 
 # Pro Tools 2024.3

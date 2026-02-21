@@ -992,6 +992,13 @@ class Engine:
     # TODO add SetTrackInputMonitorState, SetTrackSmartDspState, SetTrackHiddenState, SetTrackInactiveState
     # TODO add SetTrackFrozenState, SetTrackOnlineState, SetTrackOpenState
 
+    def select_memory_location(self, mem_loc_id: int):
+        """
+        Select a memory location given an index value
+        """
+        op = ops.CId_SelectMemoryLocation(number=mem_loc_id)
+        self.client.run(op)
+
     def set_track_record_enable(self, track_names: List[str], new_state: bool
                                 ) -> None:
         """
