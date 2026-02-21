@@ -106,6 +106,7 @@ from .select_memory_location import CId_SelectMemoryLocation
 from .set_track_mute_state import CId_SetTrackMuteState
 from .set_track_solo_state import CId_SetTrackSoloState
 from .set_track_solo_safe_state import CId_SetTrackSoloSafeState
+from .set_track_record_safe_enable_state import CId_SetTrackRecordSafeEnableState
 
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 

@@ -209,6 +209,20 @@ To begin, type `connect`.
                         }
         self.run_command_on_session(pt.CId_SetTrackSoloSafeState, command_args)
 
+    def do_recordsafetracks(self, args):
+        'Record safe one or more tracks by their track names, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled' : True
+                        }
+        self.run_command_on_session(pt.CId_SetTrackRecordSafeEnableState, command_args)
+
+    def do_unrecordsafetracks(self, args):
+        'Unrecord safe one or more tracks by their track names, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': False
+                        }
+        self.run_command_on_session(pt.CId_SetTrackRecordSafeEnableState, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Toolshell quitting...")
