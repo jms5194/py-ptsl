@@ -1079,7 +1079,7 @@ class Engine:
         """
         Sets the online state of the specified track (Video tracks only).
         """
-        op = ops.CId_SetTrackOnlineState(track_names=track_name,
+        op = ops.CId_SetTrackOnlineState(track_name=track_name,
                                                enabled=new_state)
         self.client.run(op)
 
