@@ -307,6 +307,20 @@ To begin, type `connect`.
                         }
         self.run_command_on_session(pt.CId_SetTrackOnlineState, command_args)
 
+    def do_opentrackfolder(self, args):
+        'Open track folder(s) by their track names, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': True
+                        }
+        self.run_command_on_session(pt.CId_SetTrackOpenState, command_args)
+
+    def do_closetrackfolder(self, args):
+        'Close track folder(s) by their track names, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': False
+                        }
+        self.run_command_on_session(pt.CId_SetTrackOpenState, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Toolshell quitting...")

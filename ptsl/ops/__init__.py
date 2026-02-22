@@ -113,6 +113,7 @@ from .set_track_hidden_state import CId_SetTrackHiddenState
 from .set_track_inactive_state import CId_SetTrackInactiveState
 from .set_track_frozen_state import CId_SetTrackFrozenState
 from .set_track_online_state import CId_SetTrackOnlineState
+from .set_track_open_state import CId_SetTrackOpenState
 
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 

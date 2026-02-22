@@ -1075,11 +1075,19 @@ class Engine:
                                                enabled=new_state)
         self.client.run(op)
 
-    def set_track_online_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_online_state(self, track_name: str, new_state: bool) -> None:
         """
         Sets the online state of the specified track (Video tracks only).
         """
-        op = ops.CId_SetTrackOnlineState(track_names=track_names,
+        op = ops.CId_SetTrackOnlineState(track_names=track_name,
+                                               enabled=new_state)
+        self.client.run(op)
+
+    def set_track_open_state(self, track_names: List[str], new_state: bool) -> None:
+        """
+        Sets the open state of the specified tracks (Folder tracks only).
+        """
+        op = ops.CId_SetTrackOpenState(track_names=track_names,
                                                enabled=new_state)
         self.client.run(op)
 
