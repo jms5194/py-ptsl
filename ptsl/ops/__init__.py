@@ -119,6 +119,10 @@ from .set_track_open_state import CId_SetTrackOpenState
 # Pro Tools 2024.6
 from .get_memory_locations_manage_mode import CId_GetMemoryLocationsManageMode
 from .set_memory_locations_manage_mode import CId_SetMemoryLocationsManageMode
+from .set_main_counter_format import CId_SetMainCounterFormat
+from .set_sub_counter_format import CId_SetSubCounterFormat
+from .get_main_counter_format import CId_GetMainCounterFormat
+from .get_sub_counter_format import CId_GetSubCounterFormat
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 
 # Pro Tools 2024.3

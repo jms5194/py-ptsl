@@ -1,22 +1,5 @@
 from ptsl.ops import Operation
 
-
-class CId_SetMainCounterFormat(Operation):
-    pass
-
-
-class CId_SetSubCounterFormat(Operation):
-    pass
-
-
-class CId_GetMainCounterFormat(Operation):
-    pass
-
-
-class CId_GetSubCounterFormat(Operation):
-    pass
-
-
 class CId_Undo(Operation):
     pass
 

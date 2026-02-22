@@ -898,7 +898,7 @@ class Engine:
 
         self.client.run(op)
 
-    def get_edit_mode(self):
+    def get_edit_mode(self) -> dict[str,str]:
         """
         Gets the current session edit mode as well as all possible options
 
@@ -906,11 +906,8 @@ class Engine:
         """
         op = ops.CId_GetEditMode()
         self.client.run(op)
-        mode = op.response.current_setting
-        options = op.response.possible_settings
-        response = {"current_mode" : mode, "possible_settings" : options}
-
-        return response
+        edit_mode = json.loads(op.response)
+        return edit_mode
 
     def set_edit_mode(self, mode: EditMode) -> None:
         """
@@ -919,7 +916,7 @@ class Engine:
         op = ops.CId_SetEditMode(edit_mode=mode)
         self.client.run(op)
 
-    def get_edit_tool(self):
+    def get_edit_tool(self) -> dict[str,str]:
         """
         Gets the current session edit tool as well as all possible options
 
@@ -927,11 +924,8 @@ class Engine:
         """
         op = ops.CId_GetEditTool()
         self.client.run(op)
-        mode = op.response.current_setting
-        options = op.response.possible_settings
-        response = {"current_setting": mode, "possible_settings": options}
-
-        return response
+        edit_tool = json.loads(op.response)
+        return edit_tool
 
     def set_edit_tool(self, tool: EditTool) -> None:
         """
@@ -1092,7 +1086,7 @@ class Engine:
 
     # PT 2024.03
 
-    def get_session_ids(self):
+    def get_session_ids(self) -> dict[str,str]:
         """
         Provides originId, instanceId and parentId of the current opened session:
 
@@ -1133,6 +1127,29 @@ class Engine:
         """
         op = ops.CId_SetMemoryLocationsManageMode(enabled=new_mode)
         self.client.run(op)
+
+    def set_main_counter_format(self, new_loc_type: TimelineLocationType) -> None:
+        """
+        Sets the time format of the Main Counter.
+        """
+        op = ops.CId_SetMainCounterFormat(location_type=new_loc_type)
+        self.client.run(op)
+
+    def set_sub_counter_format(self, new_loc_type: TimelineLocationType) -> None:
+        """
+        Sets the time format of the Sub Counter.
+        """
+        op = ops.CId_SetSubCounterFormat(location_type=new_loc_type)
+        self.client.run(op)
+
+    def get_main_counter_format(self) -> dict[str,str]:
+        """
+        Gets the time format of the Main Counter as well as all possible options.
+        """
+        op = ops.CId_GetMainCounterFormat()
+        self.client.run(op)
+        main_format = json.loads(op.response)
+        return main_format
 
     def get_system_delay(self) -> int:
         """
