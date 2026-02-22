@@ -295,14 +295,14 @@ To begin, type `connect`.
 
     def do_videotrackonline(self, args):
         'Set video track online by its track name, enclosed in quotations.'
-        command_args = {'track_names': shlex.split(args.strip()),
+        command_args = {'track_names': shlex.split(args.strip())[0],
                         'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackOnlineState, command_args)
 
     def do_videotrackoffline(self, args):
         'Set video track offline by its track name, enclosed in quotations.'
-        command_args = {'track_names': shlex.split(args.strip()),
+        command_args = {'track_names': shlex.split(args.strip())[0],
                         'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackOnlineState, command_args)
