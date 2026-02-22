@@ -321,6 +321,16 @@ To begin, type `connect`.
                         }
         self.run_command_on_session(pt.CId_SetTrackOpenState, command_args)
 
+    def do_getmemorylocationsmanagemode(self, _):
+        'Get the Memory Location Manage Mode'
+        r = self.run_command_on_session(pt.CId_GetMemoryLocationsManageMode, {})
+        print(f"Mode: {r['enabled']}")
+
+    def do_setmemorylocationsmanagemode(self, args):
+        'Set the Memory Location Manage Mode- 0/1 for True/False'
+        command_args = {'enabled': bool(int(args.strip()))}
+        self.run_command_on_session(pt.CId_SetMemoryLocationsManageMode, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Toolshell quitting...")

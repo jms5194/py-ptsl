@@ -988,7 +988,6 @@ class Engine:
 
     # PT 2023.12
     # TODO add ImportVideo
-    # TODO add SetTrackOpenState
 
     def select_memory_location(self, mem_loc_id: int) -> None:
         """
@@ -1095,23 +1094,45 @@ class Engine:
 
     def get_session_ids(self):
         """
-        Provides originId, instanceId, and parentId of the current opened session:
+        Provides originId, instanceId and parentId of the current opened session:
+
+        originId is the main ID of the session (or project), and it remains the same in all variations of the session through Save As, Save Copy In, etc.
+        instanceId is unique for each session variation. In a new/original session file, the instanceId is equal to originId.
+        When variants are introduced via Save As, Save Copy In, and several others, instanceId is set to a new unique ID.
+        parentId is set to the instanceId of the source session for sessions based off of a previous session.
+        For new/original sessions, the parentId is set to zeros.
+        That means parentId is equal to originId for first-generation variants, and is different for second and later generation variations.
 
         :returns: A dictionary containing the originId, instanceId, and parentId of the current opened session
         """
-        op = ops.CId.GetSessionIds()
+        op = ops.CId_GetSessionsIDs()
         self.client.run(op)
         session_id = json.loads(op.response)
         return session_id
 
     # PT 2024.06
-    # TODO add GetMemoryLocationsManageMode, SetMemoryLocationsManageMode
     # TODO add SetMainCounterFormat, SetSubCounterFormat
     # TODO add GetMainCounterFormat, GetSubCounterFormat
     # TODO add Undo, Redo, UndoAll, RedoAll
     # TODO add ClearUndoQueue, SetTrackDSPModeSafeState
     # TODO add GroupClips, UngroupClips, UngroupAllClips, RegroupClips
     # TODO add RepeatSelection, DuplicateSelection
+
+    def get_memory_locations_manage_mode(self) -> bool:
+        """
+        Returns the Memory Locations Manage Mode state (see menu Window -> Memory Locations in the UI).
+        """
+        op = ops.CId_GetMemoryLocationsManageMode()
+        self.client.run(op)
+
+        return op.response.enabled
+
+    def set_memory_locations_manage_mode(self, new_mode: bool) -> None:
+        """
+        Sets the Memory Locations Manage Mode (see menu Window -> Memory Locations in the UI).
+        """
+        op = ops.CId_SetMemoryLocationsManageMode(enabled=new_mode)
+        self.client.run(op)
 
     def get_system_delay(self) -> int:
         """

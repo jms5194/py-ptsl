@@ -91,14 +91,15 @@ from .memory_locations import CId_EditMemoryLocation, \
 
 from .create_new_tracks import CId_CreateNewTracks
 from .select_tracks import CId_SelectTracksByName
-from .edit_mode import CId_GetEditMode, CId_SetEditMode, CId_GetEditModeOptions, \
-        CId_SetEditModeOptions
 from .zoom_preset import CId_RecallZoomPreset
 from .timeline_selection import CId_SetTimelineSelection, CId_GetTimelineSelection
 from .set_edit_mode import CId_SetEditMode
 from .get_edit_mode import CId_GetEditMode
 from .set_edit_tool import CId_SetEditTool
 from .get_edit_tool import CId_GetEditTool
+from .get_edit_mode_options import CId_GetEditModeOptions
+from .set_edit_mode_options import CId_SetEditModeOptions
+
 
 # Pro Tools 2023.12
 
@@ -115,6 +116,9 @@ from .set_track_frozen_state import CId_SetTrackFrozenState
 from .set_track_online_state import CId_SetTrackOnlineState
 from .set_track_open_state import CId_SetTrackOpenState
 
+# Pro Tools 2024.6
+from .get_memory_locations_manage_mode import CId_GetMemoryLocationsManageMode
+from .set_memory_locations_manage_mode import CId_SetMemoryLocationsManageMode
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 
 # Pro Tools 2024.3

@@ -1,14 +1,6 @@
 from ptsl.ops import Operation
 
 
-class CId_GetMemoryLocationsManageMode(Operation):
-    pass
-
-
-class CId_SetMemoryLocationsManageMode(Operation):
-    pass
-
-
 class CId_SetMainCounterFormat(Operation):
     pass
 
