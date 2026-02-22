@@ -109,6 +109,7 @@ from .set_track_solo_safe_state import CId_SetTrackSoloSafeState
 from .set_track_record_safe_enable_state import CId_SetTrackRecordSafeEnableState
 from .set_track_input_monitor_state import CId_SetTrackInputMonitorState
 from .set_track_smart_dsp_state import CId_SetTrackSmartDspState
+from .set_track_hidden_state import CId_SetTrackHiddenState
 
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 
