@@ -1105,8 +1105,6 @@ class Engine:
         return session_id
 
     # PT 2024.06
-    # TODO add SetMainCounterFormat, SetSubCounterFormat
-    # TODO add GetMainCounterFormat, GetSubCounterFormat
     # TODO add Undo, Redo, UndoAll, RedoAll
     # TODO add ClearUndoQueue, SetTrackDSPModeSafeState
     # TODO add GroupClips, UngroupClips, UngroupAllClips, RegroupClips
