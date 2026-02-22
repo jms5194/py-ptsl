@@ -334,7 +334,7 @@ To begin, type `connect`.
     def do_setmaincounterformat(self, args):
         """Set the Main Counter Format: Options: TLType_Samples, TLType_Ticks, TLType_Frames, TLType_MinSecs,
         TLType_TimeCode, TLType_BarsBeats, TLType_FeetFrames, TLType_Seconds"""
-        command_args = {'format': (args.strip())}
+        command_args = {'location_type': (args.strip())}
         self.run_command_on_session(pt.CId_SetMainCounterFormat, command_args)
 
     def do_getmaincounterformat(self, _):
@@ -345,7 +345,7 @@ To begin, type `connect`.
     def do_setsubcounterformat(self, args):
         """Set the Sub Counter Format- Options: TLType_Samples, TLType_Ticks, TLType_Frames, TLType_MinSecs,
         TLType_TimeCode, TLType_BarsBeats, TLType_FeetFrames, TLType_Seconds"""
-        command_args = {'format': (args.strip())}
+        command_args = {'location_type': (args.strip())}
         self.run_command_on_session(pt.CId_SetSubCounterFormat, command_args)
 
     def do_getsubcounterformat(self, _):
