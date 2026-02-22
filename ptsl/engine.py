@@ -988,7 +988,7 @@ class Engine:
 
     # PT 2023.12
     # TODO add ImportVideo
-    # TODO add SetTrackOnlineState, SetTrackOpenState
+    # TODO add SetTrackOpenState
 
     def select_memory_location(self, mem_loc_id: int) -> None:
         """
@@ -999,21 +999,21 @@ class Engine:
 
     def set_track_mute_state(self, track_names: List[str], new_state: bool) -> None:
         """
-         Sets the mute state of one or more tracks (not including video or master tracks)
+        Sets the mute state of the specified tracks (except Video and MasterFader types of tracks).
         """
         op = ops.CId_SetTrackMuteState(track_names=track_names, enabled=new_state)
         self.client.run(op)
 
     def set_track_solo_state(self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the solo state of one or more tracks (not including video or master tracks)
+        Sets the solo state of the specified tracks (except Video and MasterFader types of tracks).
         """
         op = ops.CId_SetTrackSoloState(track_names=track_names, enabled=new_state)
         self.client.run(op)
 
     def set_track_solo_safe_state(self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the solo state of one or more tracks (not including video or master tracks)
+        Sets the solo safe state of the specified tracks (except Video and MasterFader types of tracks)
         """
         op = ops.CId_SetTrackSoloSafeState(track_names=track_names, enabled=new_state)
         self.client.run(op)
@@ -1021,7 +1021,7 @@ class Engine:
     def set_track_record_enable_state(self, track_names: List[str], new_state: bool
                                 ) -> None:
         """
-        Sets the record enabled state of one or more tracks
+        Sets the record enable state of the specified tracks (Audio, Instrument, Midi and VCA types of tracks only).
         """
         op = ops.CId_SetTrackRecordEnableState(track_names=track_names,
                                            enabled=new_state)
@@ -1029,7 +1029,7 @@ class Engine:
 
     def set_track_record_safe_enable_state(self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the record safe enabled state of one or more tracks
+        Sets the record safe enable state of the specified tracks (Audio, Instrument, Midi and VCA types of tracks only).
         """
         op = ops.CId_SetTrackRecordSafeEnableState(track_names=track_names,
                                                enabled=new_state)
@@ -1037,7 +1037,7 @@ class Engine:
 
     def set_track_input_monitor_state(self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the input monitor enabled state of one or more tracks
+        Sets the input monitor state of Audio, Instrument and VCA track types.
         """
         op = ops.CId_SetTrackInputMonitorState(track_names=track_names,
                                                enabled=new_state)
@@ -1045,7 +1045,7 @@ class Engine:
 
     def set_track_smart_dsp_state(self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the input monitor enabled state of one or more tracks
+        Sets the smart DSP state of the specified tracks (except Video, Midi, VCA and Basic Folder types of tracks).
         """
         op = ops.CId_SetTrackSmartDspState(track_names=track_names,
                                                enabled=new_state)
@@ -1053,7 +1053,7 @@ class Engine:
 
     def set_track_hidden_state(self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the input monitor enabled state of one or more tracks
+        Sets the hidden state of the specified tracks.
         """
         op = ops.CId_SetTrackHiddenState(track_names=track_names,
                                                enabled=new_state)
@@ -1061,7 +1061,7 @@ class Engine:
 
     def set_track_inactive_state(self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the input monitor enabled state of one or more tracks
+        Set the inactive state of the specified tracks (except Video tracks).
         """
         op = ops.CId_SetTrackInactiveState(track_names=track_names,
                                                enabled=new_state)
@@ -1069,9 +1069,17 @@ class Engine:
 
     def set_track_frozen_state(self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the input monitor enabled state of one or more tracks
+        Sets the frozen state of the specified tracks (Audio, Instrument, AuxInput and Routing Folder types of tracks only).
         """
         op = ops.CId_SetTrackFrozenState(track_names=track_names,
+                                               enabled=new_state)
+        self.client.run(op)
+
+    def set_track_online_state(self, track_names: List[str], new_state: bool) -> None:
+        """
+        Sets the online state of the specified track (Video tracks only).
+        """
+        op = ops.CId_SetTrackOnlineState(track_names=track_names,
                                                enabled=new_state)
         self.client.run(op)
 
@@ -1083,7 +1091,6 @@ class Engine:
 
         :returns: A dictionary containing the originId, instanceId, and parentId of the current opened session
         """
-
         op = ops.CId.GetSessionIds()
         self.client.run(op)
         session_id = json.loads(op.response)

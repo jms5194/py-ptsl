@@ -293,6 +293,20 @@ To begin, type `connect`.
                         }
         self.run_command_on_session(pt.CId_SetTrackFrozenState, command_args)
 
+    def do_videotrackonline(self, args):
+        'Set video track online by its track name, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': True
+                        }
+        self.run_command_on_session(pt.CId_SetTrackOnlineState, command_args)
+
+    def do_videotrackoffline(self, args):
+        'Set video track offline by its track name, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': False
+                        }
+        self.run_command_on_session(pt.CId_SetTrackOnlineState, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Toolshell quitting...")
