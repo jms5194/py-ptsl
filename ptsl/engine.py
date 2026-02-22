@@ -988,7 +988,6 @@ class Engine:
 
     # PT 2023.12
     # TODO add ImportVideo
-    # TODO add SetTrackHiddenState, SetTrackInactiveState
     # TODO add SetTrackFrozenState, SetTrackOnlineState, SetTrackOpenState
 
     def select_memory_location(self, mem_loc_id: int) -> None:
@@ -1057,6 +1056,14 @@ class Engine:
         Sets the input monitor enabled state of one or more tracks
         """
         op = ops.CId_SetTrackHiddenState(track_names=track_names,
+                                               enabled=new_state)
+        self.client.run(op)
+
+    def set_track_inactive_state(self, track_names: List[str], new_state: bool) -> None:
+        """
+        Sets the input monitor enabled state of one or more tracks
+        """
+        op = ops.CId_SetTrackInactiveState(track_names=track_names,
                                                enabled=new_state)
         self.client.run(op)
 

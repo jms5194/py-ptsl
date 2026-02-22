@@ -265,6 +265,20 @@ To begin, type `connect`.
                         }
         self.run_command_on_session(pt.CId_SetTrackHiddenState, command_args)
 
+    def do_maketrackinactive(self, args):
+        'Make one or more tracks inactive by their track names, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': True
+                        }
+        self.run_command_on_session(pt.CId_SetTrackInactiveState, command_args)
+
+    def do_maketrackactive(self, args):
+        'Make one or more tracks active by their track names, enclosed in quotations.'
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': False
+                        }
+        self.run_command_on_session(pt.CId_SetTrackInactiveState, command_args)
+
     def do_bye(self, _):
         'Quit Toolshell and return to your shell: BYE'
         print("Toolshell quitting...")
