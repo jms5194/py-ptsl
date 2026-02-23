@@ -32,7 +32,8 @@ from .create_session import CId_CreateSession
 from .open_session import CId_OpenSession
 from .export_session_info_as_text import CId_ExportSessionInfoAsText
 from .select_all_clips_on_track import CId_SelectAllClipsOnTrack
-from .extend_selection_to_target_tracks import CId_ExtendSelectionToTargetTracks
+from .extend_selection_to_target_tracks \
+    import (CId_ExtendSelectionToTargetTracks)
 from .create_fades_based_on_preset import CId_CreateFadesBasedOnPreset
 from .cut import CId_Cut
 from .copy import CId_Copy
@@ -92,7 +93,8 @@ from .memory_locations import CId_EditMemoryLocation, \
 from .create_new_tracks import CId_CreateNewTracks
 from .select_tracks import CId_SelectTracksByName
 from .zoom_preset import CId_RecallZoomPreset
-from .timeline_selection import CId_SetTimelineSelection, CId_GetTimelineSelection
+from .timeline_selection import \
+    CId_SetTimelineSelection, CId_GetTimelineSelection
 from .set_edit_mode import CId_SetEditMode
 from .get_edit_mode import CId_GetEditMode
 from .set_edit_tool import CId_SetEditTool
@@ -107,7 +109,8 @@ from .select_memory_location import CId_SelectMemoryLocation
 from .set_track_mute_state import CId_SetTrackMuteState
 from .set_track_solo_state import CId_SetTrackSoloState
 from .set_track_solo_safe_state import CId_SetTrackSoloSafeState
-from .set_track_record_safe_enable_state import CId_SetTrackRecordSafeEnableState
+from .set_track_record_safe_enable_state \
+    import CId_SetTrackRecordSafeEnableState
 from .set_track_input_monitor_state import CId_SetTrackInputMonitorState
 from .set_track_smart_dsp_state import CId_SetTrackSmartDspState
 from .set_track_hidden_state import CId_SetTrackHiddenState
