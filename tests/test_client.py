@@ -20,11 +20,11 @@ class MockPtslStub:
       properly-formed `~ptsl.PTSL_pb2.Response` with a
       `~ptsl.PTSL_pb2.RegisterConnectionResponseBody`.
 
-    - The `~ptsl.PTSL_pb2.CId_GetTrackList` action returns a successful response
-      with an empty track list.
+    - The `~ptsl.PTSL_pb2.CId_GetTrackList` action returns
+      a successful response with an empty track list.
 
-    - The `~ptsl.PTSL_pb2.CId_Copy` action returns a failed response with a well-
-      formed error json.
+    - The `~ptsl.PTSL_pb2.CId_Copy` action returns a
+      failed response with a well-formed error json.
 
     - The `~ptsl.PTSL_pb2.CId_Paste` action returns a failed response with a
       malformed error json meant to trigger the client's cleanup machinery.
@@ -130,8 +130,8 @@ class TestClient(TestCase):
                     client.raw_client).assert_register_connection_run()
 
                 op = CId_GetTrackList(page_limit=1,
-                                  track_filter_list=[],
-                                  is_filter_list_additive=True)
+                                      track_filter_list=[],
+                                      is_filter_list_additive=True)
 
                 client.run(op)
                 tracks = op.track_list

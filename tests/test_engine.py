@@ -559,8 +559,8 @@ class TestEngine(TestCase):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_record_enable_state(track_names= test_track,
-                                               new_state=True)
+                engine.set_track_record_enable_state(track_names=test_track,
+                                                     new_state=True)
             )
 
     def test_set_edit_mode(self):
@@ -585,70 +585,80 @@ class TestEngine(TestCase):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_mute_state(track_names=test_track, new_state=True)
+                engine.set_track_mute_state(track_names=test_track,
+                                            new_state=True)
             )
 
     def test_set_track_solo_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_solo_state(track_names=test_track, new_state=True)
+                engine.set_track_solo_state(track_names=test_track,
+                                            new_state=True)
             )
 
     def test_set_track_solo_safe_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_solo_safe_state(track_names=test_track, new_state=True)
+                engine.set_track_solo_safe_state(track_names=test_track,
+                                                 new_state=True)
             )
 
     def test_set_track_input_monitor_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_input_monitor_state(track_names=test_track, new_state=True)
+                engine.set_track_input_monitor_state(track_names=test_track,
+                                                     new_state=True)
             )
 
     def test_set_track_smart_dsp_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_smart_dsp_state(track_names=test_track, new_state=True)
+                engine.set_track_smart_dsp_state(track_names=test_track,
+                                                 new_state=True)
             )
 
     def test_set_track_hidden_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_hidden_state(track_names=test_track, new_state=True)
+                engine.set_track_hidden_state(track_names=test_track,
+                                              new_state=True)
             )
 
     def test_set_track_inactive_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_inactive_state(track_names=test_track, new_state=True)
+                engine.set_track_inactive_state(track_names=test_track,
+                                                new_state=True)
             )
 
     def test_set_track_frozen_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_frozen_state(track_names=test_track, new_state=True)
+                engine.set_track_frozen_state(track_names=test_track,
+                                              new_state=True)
             )
 
     def test_set_track_online_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = "xyz1"
             self.assertIsNone(
-                engine.set_track_online_state(track_name=test_track, new_state=True)
+                engine.set_track_online_state(track_name=test_track,
+                                              new_state=True)
             )
 
     def test_set_track_open_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_open_state(track_names=test_track, new_state=True)
+                engine.set_track_open_state(track_names=test_track,
+                                            new_state=True)
             )
 
     def test_set_memory_locations_manage_mode(self):
@@ -679,5 +689,6 @@ class TestEngine(TestCase):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_dsp_mode_safe_state(track_names=test_track, new_state=True)
+                engine.set_track_dsp_mode_safe_state(track_names=test_track,
+                                                     new_state=True)
             )
