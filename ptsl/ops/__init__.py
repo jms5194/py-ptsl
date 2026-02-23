@@ -123,6 +123,11 @@ from .set_main_counter_format import CId_SetMainCounterFormat
 from .set_sub_counter_format import CId_SetSubCounterFormat
 from .get_main_counter_format import CId_GetMainCounterFormat
 from .get_sub_counter_format import CId_GetSubCounterFormat
+from .undo import CId_Undo
+from .redo import CId_Redo
+from .undoall import CId_UndoAll
+from .redoall import CId_RedoAll
+from .clear_undo_queue import CId_ClearUndoQueue
 from .pt_202406_additions import CId_GetSessionSystemDelayInfo
 
 # Pro Tools 2024.3

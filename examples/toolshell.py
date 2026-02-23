@@ -353,6 +353,28 @@ To begin, type `connect`.
         r = self.run_command_on_session(pt.CId_GetSubCounterFormat, {})
         print(f"Current Setting: {r['current_setting']}")
 
+    def do_undo(self):
+        """Undo the last change"""
+        command_args = {'levels': 1}
+        self.run_command_on_session(pt.CId_Undo, command_args)
+
+    def do_redo(self):
+        """Redo the last change"""
+        command_args = {'levels': 1}
+        self.run_command_on_session(pt.CId_Redo, command_args)
+
+    def do_undoall(self):
+        """Undo all changes in the undo queue"""
+        self.run_command_on_session(pt.CId_UndoAll)
+
+    def do_redoall(self):
+        """Redo all changes in the redo queue"""
+        self.run_command_on_session(pt.CId_RedoAll)
+
+    def do_clearundoqueue(self):
+        """Clear the undo queue"""
+        self.run_command_on_session(pt.CId_ClearUndoQueue)
+
     def do_bye(self, _):
         """Quit Toolshell and return to your shell: BYE"""
         print("Toolshell quitting...")

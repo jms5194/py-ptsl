@@ -1,24 +1,5 @@
 from ptsl.ops import Operation
 
-class CId_Undo(Operation):
-    pass
-
-
-class CId_Redo(Operation):
-    pass
-
-
-class CId_UndoAll(Operation):
-    pass
-
-
-class CId_RedoAll(Operation):
-    pass
-
-
-class CId_ClearUndoQueue(Operation):
-    pass
-
 
 class CId_SetTrackDSPModeSafeState(Operation):
     pass

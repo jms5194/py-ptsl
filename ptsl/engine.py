@@ -1105,8 +1105,7 @@ class Engine:
         return session_id
 
     # PT 2024.06
-    # TODO add Undo, Redo, UndoAll, RedoAll
-    # TODO add ClearUndoQueue, SetTrackDSPModeSafeState
+    # TODO add SetTrackDSPModeSafeState
     # TODO add GroupClips, UngroupClips, UngroupAllClips, RegroupClips
     # TODO add RepeatSelection, DuplicateSelection
 
@@ -1147,7 +1146,64 @@ class Engine:
         op = ops.CId_GetMainCounterFormat()
         self.client.run(op)
         main_format = json.loads(op.response)
+
         return main_format
+
+    def undo(self, depth: int = 1) -> dict[str,list[str]]:
+        """
+        Undoes the last number of operations, according to depth parameter.
+
+        :returns: A dictionary of successfully undone operations
+        """
+        op = ops.CId_Undo(levels=depth)
+        self.client.run(op)
+        undone_steps =  json.loads(op.response)
+
+        return undone_steps
+
+    def redo(self, depth: int = 1) -> dict[str,list[str]]:
+        """
+        Redos the last number of operations, according to depth parameter.
+
+        :returns: A dictionary of successfully redone operations
+        """
+        op = ops.CId_Redo(levels=depth)
+        self.client.run(op)
+        redone_steps = json.loads(op.response)
+
+        return redone_steps
+
+    def undoall(self) -> dict[str,list[str]]:
+        """
+        Undoes all operations in Undo History.
+
+        :returns: A dictionary of successfully undone operations
+        """
+        op = ops.CId_UndoAll()
+        self.client.run(op)
+        undone_steps =  json.loads(op.response)
+
+        return undone_steps
+
+    def redoall(self) -> dict[str,list[str]]:
+        """
+        Redoes all operations in Redo History.
+
+        :returns: A dictionary of successfully redone operations
+        """
+        op = ops.CId_RedoAll()
+        self.client.run(op)
+        undone_steps = json.loads(op.response)
+
+        return undone_steps
+
+    def clear_undo_queue(self) -> None:
+        """
+        Clears the undo queue.
+        """
+        op = ops.CId_ClearUndoQueue()
+        self.client.run(op)
+
 
     def get_system_delay(self) -> int:
         """
