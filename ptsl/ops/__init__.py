@@ -130,6 +130,12 @@ from .redoall import CId_RedoAll
 from .clear_undo_queue import CId_ClearUndoQueue
 from .set_track_DSP_mode_safe_state import CId_SetTrackDSPModeSafeState
 from .get_system_session_delay_info import CId_GetSessionSystemDelayInfo
+from .group_clips import CId_GroupClips
+from .ungroup_clips import CId_UngroupClips
+from .ungroup_all_clips import CId_UngroupAllClips
+from .regroup_clips import CId_RegroupClips
+from .repeat_selection import CId_RepeatSelection
+from .duplicate_selection import CId_DuplicateSelection
 
 # Pro Tools 2024.3
 

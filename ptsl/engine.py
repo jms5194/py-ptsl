@@ -1105,8 +1105,6 @@ class Engine:
         return session_id
 
     # PT 2024.06
-    # TODO add GroupClips, UngroupClips, UngroupAllClips, RegroupClips
-    # TODO add RepeatSelection, DuplicateSelection
 
     def get_memory_locations_manage_mode(self) -> bool:
         """
@@ -1221,6 +1219,48 @@ class Engine:
         self.client.run(op)
 
         return op.response.samples
+
+    def group_clips(self) -> None:
+        """
+        Creates a new clip group based on the Edit selection made across tracks.
+        """
+        op = ops.CId_GroupClips()
+        self.client.run(op)
+
+    def ungroup_clips(self) -> None:
+        """
+        Reveals all underlying clips and any nested clip groups within a selected clip group, making them independent and editable.
+        """
+        op = ops.CId_UngroupClips()
+        self.client.run(op)
+
+    def ungroup_all_clips(self) -> None:
+        """
+        Reveals all clips within a selected clip group and any of its nested clip groups, making them independent and editable.
+        """
+        op = ops.CId_UngroupAllClips()
+        self.client.run(op)
+
+    def regroup_clips(self) -> None:
+        """
+        Reassembles a previously ungrouped clip group, including any nested clip groups, restoring its original structure.
+        """
+        op = ops.CId_RegroupClips()
+        self.client.run(op)
+
+    def repeat_selection(self, repeats: int = 1) -> None:
+        """
+        Duplicate selected material by the number passed in to repeats
+        """
+        op = ops.CId_RepeatSelection(num_repeats=repeats)
+        self.client.run(op)
+
+    def duplicate_selection(self) -> None:
+        """
+        Copies a selection and places it immediately after the end of the selection.
+        """
+        op = ops.CId_DuplicateSelection()
+        self.client.run(op)
 
     # PT 2024.10
     # TODO add ClearAllMemoryLocations

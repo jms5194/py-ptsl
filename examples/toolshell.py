@@ -394,6 +394,31 @@ To begin, type `connect`.
         self.run_command_on_session(pt.CId_GetSessionSystemDelayInfo, {})
         print(f"System Delay: {r['samples']}")
 
+    def do_groupclips(self, _):
+        """Group selected clips"""
+        self.run_command_on_session(pt.CId_GroupClips, {})
+
+    def do_ungroupclips(self, _):
+        """Ungroup selected clips"""
+        self.run_command_on_session(pt.CId_UngroupClips, {})
+
+    def do_regroupclips(self, _):
+        """Regroup selected clips"""
+        self.run_command_on_session(pt.CId_RegroupClips, {})
+
+    def do_ungroupallclips(self, _):
+        """Ungroup all clips"""
+        self.run_command_on_session(pt.CId_UngroupAllClips, {})
+
+    def do_repeatselection(self, args):
+        """Repeat selection x times where x is the argument passed in"""
+        command_args = {'num_repeats': int(args.strip())}
+        self.run_command_on_session(pt.CId_RepeatSelection, command_args)
+
+    def do_duplicateselection(self, _):
+        """Duplicate selection and place it immediately after the selection"""
+        self.run_command_on_session(pt.CId_DuplicateSelection, {})
+
     def do_bye(self, _):
         """Quit Toolshell and return to your shell: BYE"""
         print("Toolshell quitting...")
