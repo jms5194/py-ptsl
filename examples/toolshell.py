@@ -156,7 +156,9 @@ To begin, type `connect`.
         self.run_command_on_session(pt.CId_RecallZoomPreset, command_args)
 
     def do_getsessionids(self, _):
-        """Get the originId, instanceId and parentId of the current opened session"""
+        """
+        Get the originId, instanceId and parentId of the current opened session
+        """
         r = self.run_command_on_session(pt.CId_GetSessionIDs, {})
         print(f"Origin ID: {r['origin_id']}")
         print(f"Instance ID: {r['instance_id']}")
@@ -168,154 +170,224 @@ To begin, type `connect`.
         self.run_command_on_session(pt.CId_SelectMemoryLocation, command_args)
 
     def do_mutetracks(self, args):
-        """Mute one or more tracks by their track names, enclosed in quotations"""
+        """
+        Mute one or more tracks by their track names,
+        enclosed in quotations
+        """
         command_args = {'track_names': shlex.split(args.strip()),
-                        'enabled' : True
+                        'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackMuteState, command_args)
 
     def do_unmutetracks(self, args):
-        """Unmute one or more tracks by their track names, enclosed in quotations"""
+        """
+        Unmute one or more tracks by their track names,
+        enclosed in quotations
+        """
         command_args = {'track_names': shlex.split(args.strip()),
-                        'enabled' : False
+                        'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackMuteState, command_args)
 
     def do_solotracks(self, args):
-        """Solo one or more tracks by their track names, enclosed in quotations."""
+        """
+        Solo one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
-                        'enabled' : True
+                        'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackSoloState, command_args)
 
     def do_unsolotracks(self, args):
-        """Unsolo one or more tracks by their track names, enclosed in quotations."""
+        """
+        Unsolo one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
-                        'enabled' : False
+                        'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackSoloState, command_args)
 
     def do_solosafetracks(self, args):
-        """Solo safe one or more tracks by their track names, enclosed in quotations."""
+        """
+        Solo safe one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
-                        'enabled' : True
+                        'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackSoloSafeState, command_args)
 
     def do_unsolosafetracks(self, args):
-        """Unsolo safe one or more tracks by their track names, enclosed in quotations."""
+        """
+        Unsolo safe one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
-                        'enabled' : False
+                        'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackSoloSafeState, command_args)
 
     def do_recordsafetracks(self, args):
-        """Record safe one or more tracks by their track names, enclosed in quotations."""
-        command_args = {'track_names': shlex.split(args.strip()),
-                        'enabled' : True
-                        }
-        self.run_command_on_session(pt.CId_SetTrackRecordSafeEnableState, command_args)
-
-    def do_unrecordsafetracks(self, args):
-        """Unrecord safe one or more tracks by their track names, enclosed in quotations."""
-        command_args = {'track_names': shlex.split(args.strip()),
-                        'enabled': False
-                        }
-        self.run_command_on_session(pt.CId_SetTrackRecordSafeEnableState, command_args)
-
-    def do_trackinputmonitorenable(self, args):
-        """Enable input monitor on one or more tracks by their track names, enclosed in quotations."""
+        """
+        Record safe one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': True
                         }
-        self.run_command_on_session(pt.CId_SetTrackInputMonitorState, command_args)
+        self.run_command_on_session(pt.CId_SetTrackRecordSafeEnableState,
+                                    command_args)
 
-    def do_trackinputmonitordisable(self, args):
-        """Enable input monitor on one or more tracks by their track names, enclosed in quotations."""
+    def do_unrecordsafetracks(self, args):
+        """
+        Unrecord safe one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': False
                         }
-        self.run_command_on_session(pt.CId_SetTrackInputMonitorState, command_args)
+        self.run_command_on_session(pt.CId_SetTrackRecordSafeEnableState,
+                                    command_args)
+
+    def do_trackinputmonitorenable(self, args):
+        """
+        Enable input monitor on one or more tracks by their track names,
+        enclosed in quotations.
+        """
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': True
+                        }
+        self.run_command_on_session(pt.CId_SetTrackInputMonitorState,
+                                    command_args)
+
+    def do_trackinputmonitordisable(self, args):
+        """
+        Enable input monitor on one or more tracks by their track names,
+        enclosed in quotations.
+        """
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': False
+                        }
+        self.run_command_on_session(pt.CId_SetTrackInputMonitorState,
+                                    command_args)
 
     def do_tracksmartdspenable(self, args):
-        """Enable Smart DSP on one or more tracks by their track names, enclosed in quotations."""
+        """
+        Enable Smart DSP on one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackSmartDspState, command_args)
 
     def do_tracksmartdspdisable(self, args):
-        """Enable Smart DSP on one or more tracks by their track names, enclosed in quotations."""
+        """
+        Enable Smart DSP on one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackSmartDspState, command_args)
 
     def do_hidetracks(self, args):
-        """Hide one or more tracks by their track names, enclosed in quotations."""
+        """
+        Hide one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackHiddenState, command_args)
 
     def do_showtracks(self, args):
-        """Show one or more tracks by their track names, enclosed in quotations."""
+        """
+        Show one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackHiddenState, command_args)
 
     def do_maketrackinactive(self, args):
-        """Make one or more tracks inactive by their track names, enclosed in quotations."""
+        """
+        Make one or more tracks inactive by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackInactiveState, command_args)
 
     def do_maketrackactive(self, args):
-        """Make one or more tracks active by their track names, enclosed in quotations."""
+        """
+        Make one or more tracks active by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackInactiveState, command_args)
 
     def do_freezetracks(self, args):
-        """Freeze one or more tracks by their track names, enclosed in quotations."""
+        """
+        Freeze one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackFrozenState, command_args)
 
     def do_unfreezetracks(self, args):
-        """Unfreeze one or more tracks by their track names, enclosed in quotations."""
+        """
+        Unfreeze one or more tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackFrozenState, command_args)
 
     def do_videotrackonline(self, args):
-        """Set video track online by its track name, enclosed in quotations."""
+        """
+        Set video track online by its track name,
+        enclosed in quotations.
+        """
         command_args = {'track_name': shlex.split(args.strip())[0],
                         'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackOnlineState, command_args)
 
     def do_videotrackoffline(self, args):
-        """Set video track offline by its track name, enclosed in quotations."""
+        """
+        Set video track offline by its track name,
+        enclosed in quotations.
+        """
         command_args = {'track_name': shlex.split(args.strip())[0],
                         'enabled': False
                         }
         self.run_command_on_session(pt.CId_SetTrackOnlineState, command_args)
 
     def do_opentrackfolder(self, args):
-        """Open track folder(s) by their track names, enclosed in quotations."""
+        """
+        Open track folder(s) by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': True
                         }
         self.run_command_on_session(pt.CId_SetTrackOpenState, command_args)
 
     def do_closetrackfolder(self, args):
-        """Close track folder(s) by their track names, enclosed in quotations."""
+        """
+        Close track folder(s) by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': False
                         }
@@ -323,17 +395,23 @@ To begin, type `connect`.
 
     def do_getmemorylocationsmanagemode(self, _):
         """Get the Memory Location Manage Mode"""
-        r = self.run_command_on_session(pt.CId_GetMemoryLocationsManageMode, {})
+        r = self.run_command_on_session(pt.CId_GetMemoryLocationsManageMode,
+                                        {})
         print(f"Mode: {r['enabled']}")
 
     def do_setmemorylocationsmanagemode(self, args):
         """Set the Memory Location Manage Mode- 0/1 for True/False"""
         command_args = {'enabled': bool(int(args.strip()))}
-        self.run_command_on_session(pt.CId_SetMemoryLocationsManageMode, command_args)
+        self.run_command_on_session(pt.CId_SetMemoryLocationsManageMode,
+                                    command_args)
 
     def do_setmaincounterformat(self, args):
-        """Set the Main Counter Format: Options: TLType_Samples, TLType_Ticks, TLType_Frames, TLType_MinSecs,
-        TLType_TimeCode, TLType_BarsBeats, TLType_FeetFrames, TLType_Seconds"""
+        """
+        Set the Main Counter Format: Options: TLType_Samples,
+        TLType_Ticks, TLType_Frames, TLType_MinSecs,
+        TLType_TimeCode, TLType_BarsBeats, TLType_FeetFrames,
+        TLType_Seconds
+        """
         command_args = {'location_type': (args.strip())}
         self.run_command_on_session(pt.CId_SetMainCounterFormat, command_args)
 
@@ -343,8 +421,12 @@ To begin, type `connect`.
         print(f"Current Setting: {r['current_setting']}")
 
     def do_setsubcounterformat(self, args):
-        """Set the Sub Counter Format- Options: TLType_Samples, TLType_Ticks, TLType_Frames, TLType_MinSecs,
-        TLType_TimeCode, TLType_BarsBeats, TLType_FeetFrames, TLType_Seconds"""
+        """
+        Set the Sub Counter Format- Options: TLType_Samples,
+        TLType_Ticks, TLType_Frames, TLType_MinSecs,
+        TLType_TimeCode, TLType_BarsBeats, TLType_FeetFrames,
+        TLType_Seconds
+        """
         command_args = {'location_type': (args.strip())}
         self.run_command_on_session(pt.CId_SetSubCounterFormat, command_args)
 
@@ -376,22 +458,30 @@ To begin, type `connect`.
         self.run_command_on_session(pt.CId_ClearUndoQueue, {})
 
     def do_tracksDSPmodesafed(self, args):
-        """Safe DSP Mode on tracks by their track names, enclosed in quotations."""
+        """
+        Safe DSP Mode on tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': True
                         }
-        self.run_command_on_session(pt.CId_SetTrackDSPModeSafeState, command_args)
+        self.run_command_on_session(pt.CId_SetTrackDSPModeSafeState,
+                                    command_args)
 
     def do_tracksDSPmodeunsafed(self, args):
-        """Unsafe DSP Mode on tracks by their track names, enclosed in quotations."""
+        """
+        Unsafe DSP Mode on tracks by their track names,
+        enclosed in quotations.
+        """
         command_args = {'track_names': shlex.split(args.strip()),
                         'enabled': False
                         }
-        self.run_command_on_session(pt.CId_SetTrackDSPModeSafeState, command_args)
+        self.run_command_on_session(pt.CId_SetTrackDSPModeSafeState,
+                                    command_args)
 
     def do_getsystemdelay(self, _):
         """Get the System Delay in Samples"""
-        self.run_command_on_session(pt.CId_GetSessionSystemDelayInfo, {})
+        r = self.run_command_on_session(pt.CId_GetSessionSystemDelayInfo, {})
         print(f"System Delay: {r['samples']}")
 
     def do_groupclips(self, _):
@@ -429,7 +519,6 @@ To begin, type `connect`.
         if self.client:
             self.client.close()
         return True
-
 
 
 if __name__ == '__main__':

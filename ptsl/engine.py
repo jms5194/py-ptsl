@@ -302,7 +302,7 @@ class Engine:
         :param str new_name: The new name to give the track.
         """
         op = ops.CId_RenameTargetTrack(current_name=old_name,
-                                   new_name=new_name)
+                                       new_name=new_name)
         self.client.run(op)
 
     def rename_selected_clip(
@@ -319,8 +319,8 @@ class Engine:
             defaults to :attr:`~ptsl.PTSL_pb2.CL_ClipLocation.CL_Timeline`
         """
         op = ops.CId_RenameSelectedClip(clip_location=clip_location,
-                                    new_name=new_name,
-                                    rename_file=rename_file)
+                                        new_name=new_name,
+                                        rename_file=rename_file)
 
         self.client.run(op)
 
@@ -331,8 +331,8 @@ class Engine:
         Renames a named clip in the current session.
         """
         op = ops.CId_RenameTargetClip(clip_name=clip_name,
-                                  new_name=new_name,
-                                  rename_file=rename_file)
+                                      new_name=new_name,
+                                      rename_file=rename_file)
 
         self.client.run(op)
 
@@ -880,11 +880,11 @@ class Engine:
         Create new Tracks
         """
         op = ops.CId_CreateNewTracks(number_of_tracks=number_of_tracks,
-                                 track_name=track_name,
-                                 track_format=track_format,
-                                 track_type=track_type,
-                                 track_timebase=track_timebase
-                                 )
+                                     track_name=track_name,
+                                     track_format=track_format,
+                                     track_type=track_type,
+                                     track_timebase=track_timebase
+                                     )
         self.client.run(op)
 
     def select_tracks_by_name(self, names: List[str],
@@ -898,11 +898,12 @@ class Engine:
 
         self.client.run(op)
 
-    def get_edit_mode(self) -> dict[str,str]:
+    def get_edit_mode(self) -> dict[str, str]:
         """
         Gets the current session edit mode as well as all possible options
 
-        :returns: A dictionary containing the current edit mode and all possible edit modes
+        :returns: A dictionary containing the current edit mode
+        and all possible edit modes
         """
         op = ops.CId_GetEditMode()
         self.client.run(op)
@@ -916,11 +917,12 @@ class Engine:
         op = ops.CId_SetEditMode(edit_mode=mode)
         self.client.run(op)
 
-    def get_edit_tool(self) -> dict[str,str]:
+    def get_edit_tool(self) -> dict[str, str]:
         """
         Gets the current session edit tool as well as all possible options
 
-        :returns: A dictionary containing the current edit tool and all possible edit tools
+        :returns: A dictionary containing the current edit tool
+        and all possible edit tools
         """
         op = ops.CId_GetEditTool()
         self.client.run(op)
@@ -990,45 +992,60 @@ class Engine:
         op = ops.CId_SelectMemoryLocation(number=mem_loc_id)
         self.client.run(op)
 
-    def set_track_mute_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_mute_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the mute state of the specified tracks (except Video and MasterFader types of tracks).
+        Sets the mute state of the specified tracks
+        (except Video and MasterFader types of tracks).
         """
-        op = ops.CId_SetTrackMuteState(track_names=track_names, enabled=new_state)
+        op = ops.CId_SetTrackMuteState(
+            track_names=track_names, enabled=new_state)
         self.client.run(op)
 
-    def set_track_solo_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_solo_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the solo state of the specified tracks (except Video and MasterFader types of tracks).
+        Sets the solo state of the specified tracks
+        (except Video and MasterFader types of tracks).
         """
-        op = ops.CId_SetTrackSoloState(track_names=track_names, enabled=new_state)
+        op = ops.CId_SetTrackSoloState(
+            track_names=track_names, enabled=new_state)
         self.client.run(op)
 
-    def set_track_solo_safe_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_solo_safe_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the solo safe state of the specified tracks (except Video and MasterFader types of tracks)
+        Sets the solo safe state of the specified tracks
+        (except Video and MasterFader types of tracks)
         """
-        op = ops.CId_SetTrackSoloSafeState(track_names=track_names, enabled=new_state)
+        op = ops.CId_SetTrackSoloSafeState(
+            track_names=track_names, enabled=new_state)
         self.client.run(op)
 
-    def set_track_record_enable_state(self, track_names: List[str], new_state: bool
-                                ) -> None:
+    def set_track_record_enable_state(
+            self,
+            track_names: List[str],
+            new_state: bool) -> None:
         """
-        Sets the record enable state of the specified tracks (Audio, Instrument, Midi and VCA types of tracks only).
+        Sets the record enable state of the specified tracks
+        (Audio, Instrument, Midi and VCA types of tracks only).
         """
         op = ops.CId_SetTrackRecordEnableState(track_names=track_names,
-                                           enabled=new_state)
-        self.client.run(op)
-
-    def set_track_record_safe_enable_state(self, track_names: List[str], new_state: bool) -> None:
-        """
-        Sets the record safe enable state of the specified tracks (Audio, Instrument, Midi and VCA types of tracks only).
-        """
-        op = ops.CId_SetTrackRecordSafeEnableState(track_names=track_names,
                                                enabled=new_state)
         self.client.run(op)
 
-    def set_track_input_monitor_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_record_safe_enable_state(
+            self, track_names: List[str], new_state: bool) -> None:
+        """
+        Sets the record safe enable state of the specified tracks
+        (Audio, Instrument, Midi and VCA types of tracks only).
+        """
+        op = ops.CId_SetTrackRecordSafeEnableState(track_names=track_names,
+                                                   enabled=new_state)
+        self.client.run(op)
+
+    def set_track_input_monitor_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
         Sets the input monitor state of Audio, Instrument and VCA track types.
         """
@@ -1036,36 +1053,42 @@ class Engine:
                                                enabled=new_state)
         self.client.run(op)
 
-    def set_track_smart_dsp_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_smart_dsp_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the smart DSP state of the specified tracks (except Video, Midi, VCA and Basic Folder types of tracks).
+        Sets the smart DSP state of the specified tracks
+        (except Video, Midi, VCA and Basic Folder types of tracks).
         """
         op = ops.CId_SetTrackSmartDspState(track_names=track_names,
-                                               enabled=new_state)
+                                           enabled=new_state)
         self.client.run(op)
 
-    def set_track_hidden_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_hidden_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
         Sets the hidden state of the specified tracks.
         """
         op = ops.CId_SetTrackHiddenState(track_names=track_names,
-                                               enabled=new_state)
+                                         enabled=new_state)
         self.client.run(op)
 
-    def set_track_inactive_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_inactive_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
         Set the inactive state of the specified tracks (except Video tracks).
         """
         op = ops.CId_SetTrackInactiveState(track_names=track_names,
-                                               enabled=new_state)
+                                           enabled=new_state)
         self.client.run(op)
 
-    def set_track_frozen_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_frozen_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
-        Sets the frozen state of the specified tracks (Audio, Instrument, AuxInput and Routing Folder types of tracks only).
+        Sets the frozen state of the specified tracks
+        (Audio, Instrument, AuxInput and Routing Folder types of tracks only).
         """
         op = ops.CId_SetTrackFrozenState(track_names=track_names,
-                                               enabled=new_state)
+                                         enabled=new_state)
         self.client.run(op)
 
     def set_track_online_state(self, track_name: str, new_state: bool) -> None:
@@ -1073,31 +1096,40 @@ class Engine:
         Sets the online state of the specified track (Video tracks only).
         """
         op = ops.CId_SetTrackOnlineState(track_name=track_name,
-                                               enabled=new_state)
+                                         enabled=new_state)
         self.client.run(op)
 
-    def set_track_open_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_open_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
         Sets the open state of the specified tracks (Folder tracks only).
         """
         op = ops.CId_SetTrackOpenState(track_names=track_names,
-                                               enabled=new_state)
+                                       enabled=new_state)
         self.client.run(op)
 
     # PT 2024.03
 
-    def get_session_ids(self) -> dict[str,str]:
+    def get_session_ids(self) -> dict[str, str]:
         """
-        Provides originId, instanceId and parentId of the current opened session:
+        Provides originId, instanceId and
+        parentId of the current opened session:
 
-        originId is the main ID of the session (or project), and it remains the same in all variations of the session through Save As, Save Copy In, etc.
-        instanceId is unique for each session variation. In a new/original session file, the instanceId is equal to originId.
-        When variants are introduced via Save As, Save Copy In, and several others, instanceId is set to a new unique ID.
-        parentId is set to the instanceId of the source session for sessions based off of a previous session.
+        originId is the main ID of the session (or project),
+        and it remains the same in all variations of the session
+        through Save As, Save Copy In, etc.
+        instanceId is unique for each session variation.
+        In a new/original session file, the instanceId is equal to originId.
+        When variants are introduced via Save As,
+        Save Copy In, and several others, instanceId is set to a new unique ID.
+        parentId is set to the instanceId of the source session
+        for sessions based off of a previous session.
         For new/original sessions, the parentId is set to zeros.
-        That means parentId is equal to originId for first-generation variants, and is different for second and later generation variations.
+        That means parentId is equal to originId for first-generation variants,
+        and is different for second and later generation variations.
 
-        :returns: A dictionary containing the originId, instanceId, and parentId of the current opened session
+        :returns: A dictionary containing the originId, instanceId,
+        and parentId of the current opened session
         """
         op = ops.CId_GetSessionsIDs()
         self.client.run(op)
@@ -1108,7 +1140,8 @@ class Engine:
 
     def get_memory_locations_manage_mode(self) -> bool:
         """
-        Returns the Memory Locations Manage Mode state (see menu Window -> Memory Locations in the UI).
+        Returns the Memory Locations Manage Mode state
+        (see menu Window -> Memory Locations in the UI).
         """
         op = ops.CId_GetMemoryLocationsManageMode()
         self.client.run(op)
@@ -1117,28 +1150,32 @@ class Engine:
 
     def set_memory_locations_manage_mode(self, new_mode: bool) -> None:
         """
-        Sets the Memory Locations Manage Mode (see menu Window -> Memory Locations in the UI).
+        Sets the Memory Locations Manage Mode
+        (see menu Window -> Memory Locations in the UI).
         """
         op = ops.CId_SetMemoryLocationsManageMode(enabled=new_mode)
         self.client.run(op)
 
-    def set_main_counter_format(self, new_loc_type: TimelineLocationType) -> None:
+    def set_main_counter_format(
+            self, new_loc_type: TimelineLocationType) -> None:
         """
         Sets the time format of the Main Counter.
         """
         op = ops.CId_SetMainCounterFormat(location_type=new_loc_type)
         self.client.run(op)
 
-    def set_sub_counter_format(self, new_loc_type: TimelineLocationType) -> None:
+    def set_sub_counter_format(
+            self, new_loc_type: TimelineLocationType) -> None:
         """
         Sets the time format of the Sub Counter.
         """
         op = ops.CId_SetSubCounterFormat(location_type=new_loc_type)
         self.client.run(op)
 
-    def get_main_counter_format(self) -> dict[str,str]:
+    def get_main_counter_format(self) -> dict[str, str]:
         """
-        Gets the time format of the Main Counter as well as all possible options.
+        Gets the time format of the Main Counter
+        as well as all possible options.
         """
         op = ops.CId_GetMainCounterFormat()
         self.client.run(op)
@@ -1146,7 +1183,7 @@ class Engine:
 
         return main_format
 
-    def undo(self, depth: int = 1) -> dict[str,list[str]]:
+    def undo(self, depth: int = 1) -> dict[str, list[str]]:
         """
         Undoes the last number of operations, according to depth parameter.
 
@@ -1154,11 +1191,11 @@ class Engine:
         """
         op = ops.CId_Undo(levels=depth)
         self.client.run(op)
-        undone_steps =  json.loads(op.response)
+        undone_steps = json.loads(op.response)
 
         return undone_steps
 
-    def redo(self, depth: int = 1) -> dict[str,list[str]]:
+    def redo(self, depth: int = 1) -> dict[str, list[str]]:
         """
         Redos the last number of operations, according to depth parameter.
 
@@ -1170,7 +1207,7 @@ class Engine:
 
         return redone_steps
 
-    def undoall(self) -> dict[str,list[str]]:
+    def undoall(self) -> dict[str, list[str]]:
         """
         Undoes all operations in Undo History.
 
@@ -1178,11 +1215,11 @@ class Engine:
         """
         op = ops.CId_UndoAll()
         self.client.run(op)
-        undone_steps =  json.loads(op.response)
+        undone_steps = json.loads(op.response)
 
         return undone_steps
 
-    def redoall(self) -> dict[str,list[str]]:
+    def redoall(self) -> dict[str, list[str]]:
         """
         Redoes all operations in Redo History.
 
@@ -1201,12 +1238,13 @@ class Engine:
         op = ops.CId_ClearUndoQueue()
         self.client.run(op)
 
-    def set_track_dsp_mode_safe_state(self, track_names: List[str], new_state: bool) -> None:
+    def set_track_dsp_mode_safe_state(
+            self, track_names: List[str], new_state: bool) -> None:
         """
         Sets the DSP Mode Safe state for the specified tracks.
         """
         op = ops.CId_SetTrackDSPModeSafeState(track_names=track_names,
-                                               enabled=new_state)
+                                              enabled=new_state)
         self.client.run(op)
 
     def get_system_delay(self) -> int:
@@ -1222,28 +1260,35 @@ class Engine:
 
     def group_clips(self) -> None:
         """
-        Creates a new clip group based on the Edit selection made across tracks.
+        Creates a new clip group based on the
+        Edit selection made across tracks.
         """
         op = ops.CId_GroupClips()
         self.client.run(op)
 
     def ungroup_clips(self) -> None:
         """
-        Reveals all underlying clips and any nested clip groups within a selected clip group, making them independent and editable.
+        Reveals all underlying clips and any nested clip groups
+        within a selected clip group,
+        making them independent and editable.
         """
         op = ops.CId_UngroupClips()
         self.client.run(op)
 
     def ungroup_all_clips(self) -> None:
         """
-        Reveals all clips within a selected clip group and any of its nested clip groups, making them independent and editable.
+        Reveals all clips within a selected clip group
+        and any of its nested clip groups,
+        making them independent and editable.
         """
         op = ops.CId_UngroupAllClips()
         self.client.run(op)
 
     def regroup_clips(self) -> None:
         """
-        Reassembles a previously ungrouped clip group, including any nested clip groups, restoring its original structure.
+        Reassembles a previously ungrouped clip group,
+        including any nested clip groups,
+        restoring its original structure.
         """
         op = ops.CId_RegroupClips()
         self.client.run(op)
@@ -1257,7 +1302,8 @@ class Engine:
 
     def duplicate_selection(self) -> None:
         """
-        Copies a selection and places it immediately after the end of the selection.
+        Copies a selection and places it immediately
+         fter the end of the selection.
         """
         op = ops.CId_DuplicateSelection()
         self.client.run(op)
@@ -1271,17 +1317,21 @@ class Engine:
         op = ops.CId_ClearAllMemoryLocations()
         self.client.run(op)
 
-
     # PT 2025.6
     # TODO add GetTimeAsType, SubtractLocations
-    # TODO add AddLengthToLocation, SubtractPositions, AddLengthToPosition
+    # TODO add AddLengthToLocation, SubtractPositions,
+    # TODO add AddLengthToPosition
     # TODO add ImportAudioToClipList, SpotClipsByID, GetClipList
-    # TODO add GetMediaFileInfo, CreateAudioClips, GetExportMixSourceList
-    # TODO add GetMonitorOutputPath, BounceTrack, BeginScrub, EndScrub, ContinueScrub
-    # TODO add EnableCueProVideoPlugIn, UpdateVideo, EnableAPI, ExchangePublicKeys
+    # TODO add GetMediaFileInfo, CreateAudioClips,
+    # TODO add GetExportMixSourceList
+    # TODO add GetMonitorOutputPath, BounceTrack,
+    # TODO add BeginScrub, EndScrub, ContinueScrub
+    # TODO add EnableCueProVideoPlugIn, UpdateVideo, EnableAPI,
+    # TODO ExchangePublicKeys
 
-    def get_edit_selection(self, loc_type: TimelineLocationType = TLType_TimeCode
-                               ) -> Tuple[str, str]:
+    def get_edit_selection(
+            self, loc_type: TimelineLocationType = TLType_TimeCode
+                           ) -> Tuple[str, str]:
         """
         Returns data about the current edit selection.
 
@@ -1293,9 +1343,14 @@ class Engine:
         return (op.response.in_time, op.response.out_time)
 
     # PT 2025.10
-    # TODO add CreateSignalPath, SetTrackMainOutputAssignments, GetTrackControlInfo
+    # TODO add CreateSignalPath,
+    # TODO add SetTrackMainOutputAssignments,
+    # TODO add GetTrackControlInfo
     # TODO add GetTrackControlBreakpoints, SetTrackControlBreakpoints
     # TODO add InstallMenuHandler, UninstallMenuHandler
-    # TODO add SetTrackColor, GetTrackPlaylists, SetTrackTimebase, GetColorPalette
-    # TODO add DeleteTracks, GetPlaylistElements, WriteSelectedTranscriptionToJSONFile
-    # TODO add CreateBatchJob, GetBatchJobStatus, CompleteBatchJob, CancelBatchJob
+    # TODO add SetTrackColor, GetTrackPlaylists, SetTrackTimebase,
+    # TODO add GetColorPalette
+    # TODO add DeleteTracks, GetPlaylistElements,
+    # TODO add WriteSelectedTranscriptionToJSONFile
+    # TODO add CreateBatchJob, GetBatchJobStatus, CompleteBatchJob,
+    # TODO add CancelBatchJob
