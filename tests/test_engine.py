@@ -566,24 +566,39 @@ class TestEngine(TestCase):
     def test_set_edit_mode(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
-                engine.set_edit_mode(new_mode=pt.EMO_Slip)
+                engine.set_edit_mode(mode=pt.EMO_Slip)
             )
 
     def test_set_edit_tool(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
-                engine.set_edit_tool(new_tool=pt.ET_SmartTool)
+                engine.set_edit_tool(tool=pt.ET_SmartTool)
             )
 
     def test_select_memory_location(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
-                engine.select_memory_location(new_location=1)
+                engine.select_memory_location(mem_loc_id=1)
             )
 
     def test_set_track_mute_state(self):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_mute_state(track_names=test_track, enabled=True)
+                engine.set_track_mute_state(track_names=test_track, new_state=True)
             )
+
+    def test_set_track_solo_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_solo_state(track_names=test_track, new_state=True)
+            )
+
+    def test_set_track_solo_safe_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_solo_safe_state(track_names=test_track, new_state=True)
+            )
+
