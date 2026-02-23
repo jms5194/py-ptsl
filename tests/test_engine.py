@@ -602,3 +602,82 @@ class TestEngine(TestCase):
                 engine.set_track_solo_safe_state(track_names=test_track, new_state=True)
             )
 
+    def test_set_track_input_monitor_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_input_monitor_state(track_names=test_track, new_state=True)
+            )
+
+    def test_set_track_smart_dsp_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_smart_dsp_state(track_names=test_track, new_state=True)
+            )
+
+    def test_set_track_hidden_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_hidden_state(track_names=test_track, new_state=True)
+            )
+
+    def test_set_track_inactive_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_inactive_state(track_names=test_track, new_state=True)
+            )
+
+    def test_set_track_frozen_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_frozen_state(track_names=test_track, new_state=True)
+            )
+
+    def test_set_track_online_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = "xyz1"
+            self.assertIsNone(
+                engine.set_track_online_state(track_name=test_track, new_state=True)
+            )
+
+    def test_set_track_open_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_open_state(track_names=test_track, new_state=True)
+            )
+
+    def test_set_memory_locations_manage_mode(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.set_memory_locations_manage_mode(new_mode=True)
+            )
+
+    def test_set_main_counter_format(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.set_main_counter_format(new_loc_type=pt.TLType_TimeCode)
+            )
+
+    def test_set_sub_counter_format(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.set_sub_counter_format(new_loc_type=pt.TLType_TimeCode)
+            )
+
+    def test_clear_undo_queue(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.clear_undo_queue()
+            )
+
+    def test_set_track_dsp_mode_safe_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_dsp_mode_safe_state(track_names=test_track, new_state=True)
+            )
