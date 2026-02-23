@@ -137,6 +137,10 @@ from .regroup_clips import CId_RegroupClips
 from .repeat_selection import CId_RepeatSelection
 from .duplicate_selection import CId_DuplicateSelection
 
+# Pro Tools 2024.10
+
+from .clear_all_memory_locations import CId_ClearAllMemoryLocations
+
 # Pro Tools 2024.3
 
 from .get_session_ids import CId_GetSessionsIDs

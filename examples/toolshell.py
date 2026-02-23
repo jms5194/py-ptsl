@@ -419,6 +419,10 @@ To begin, type `connect`.
         """Duplicate selection and place it immediately after the selection"""
         self.run_command_on_session(pt.CId_DuplicateSelection, {})
 
+    def do_clearallmemorylocations(self, _):
+        """Clear all memory locations"""
+        self.run_command_on_session(pt.CId_ClearAllMemoryLocations, {})
+
     def do_bye(self, _):
         """Quit Toolshell and return to your shell: BYE"""
         print("Toolshell quitting...")

@@ -1263,7 +1263,14 @@ class Engine:
         self.client.run(op)
 
     # PT 2024.10
-    # TODO add ClearAllMemoryLocations
+
+    def clear_all_memory_locations(self) -> None:
+        """
+        Clears all the memory locations in the session.
+        """
+        op = ops.CId_ClearAllMemoryLocations()
+        self.client.run(op)
+
 
     # PT 2025.6
     # TODO add GetTimeAsType, SubtractLocations
