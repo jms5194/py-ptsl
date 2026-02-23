@@ -1105,7 +1105,6 @@ class Engine:
         return session_id
 
     # PT 2024.06
-    # TODO add SetTrackDSPModeSafeState
     # TODO add GroupClips, UngroupClips, UngroupAllClips, RegroupClips
     # TODO add RepeatSelection, DuplicateSelection
 
@@ -1204,6 +1203,13 @@ class Engine:
         op = ops.CId_ClearUndoQueue()
         self.client.run(op)
 
+    def set_track_dsp_mode_safe_state(self, track_names: List[str], new_state: bool) -> None:
+        """
+        Sets the DSP Mode Safe state for the specified tracks.
+        """
+        op = ops.CId_SetTrackDSPModeSafeState(track_names=track_names,
+                                               enabled=new_state)
+        self.client.run(op)
 
     def get_system_delay(self) -> int:
         """

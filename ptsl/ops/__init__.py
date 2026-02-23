@@ -128,7 +128,8 @@ from .redo import CId_Redo
 from .undoall import CId_UndoAll
 from .redoall import CId_RedoAll
 from .clear_undo_queue import CId_ClearUndoQueue
-from .pt_202406_additions import CId_GetSessionSystemDelayInfo
+from .set_track_DSP_mode_safe_state import CId_SetTrackDSPModeSafeState
+from .get_system_session_delay_info import CId_GetSessionSystemDelayInfo
 
 # Pro Tools 2024.3
 

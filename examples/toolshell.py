@@ -363,17 +363,36 @@ To begin, type `connect`.
         command_args = {'levels': 1}
         self.run_command_on_session(pt.CId_Redo, command_args)
 
-    def do_undoall(self):
+    def do_undoall(self, _):
         """Undo all changes in the undo queue"""
-        self.run_command_on_session(pt.CId_UndoAll)
+        self.run_command_on_session(pt.CId_UndoAll, {})
 
-    def do_redoall(self):
+    def do_redoall(self, _):
         """Redo all changes in the redo queue"""
-        self.run_command_on_session(pt.CId_RedoAll)
+        self.run_command_on_session(pt.CId_RedoAll, {})
 
-    def do_clearundoqueue(self):
+    def do_clearundoqueue(self, _):
         """Clear the undo queue"""
-        self.run_command_on_session(pt.CId_ClearUndoQueue)
+        self.run_command_on_session(pt.CId_ClearUndoQueue, {})
+
+    def do_tracksDSPmodesafed(self, args):
+        """Safe DSP Mode on tracks by their track names, enclosed in quotations."""
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': True
+                        }
+        self.run_command_on_session(pt.CId_SetTrackDSPModeSafeState, command_args)
+
+    def do_tracksDSPmodeunsafed(self, args):
+        """Unsafe DSP Mode on tracks by their track names, enclosed in quotations."""
+        command_args = {'track_names': shlex.split(args.strip()),
+                        'enabled': False
+                        }
+        self.run_command_on_session(pt.CId_SetTrackDSPModeSafeState, command_args)
+
+    def do_getsystemdelay(self, _):
+        """Get the System Delay in Samples"""
+        self.run_command_on_session(pt.CId_GetSessionSystemDelayInfo, {})
+        print(f"System Delay: {r['samples']}")
 
     def do_bye(self, _):
         """Quit Toolshell and return to your shell: BYE"""

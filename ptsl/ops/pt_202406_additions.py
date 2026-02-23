@@ -1,14 +1,5 @@
 from ptsl.ops import Operation
 
-
-class CId_SetTrackDSPModeSafeState(Operation):
-    pass
-
-
-class CId_GetSessionSystemDelayInfo(Operation):
-    pass
-
-
 class CId_GroupClips(Operation):
     pass
 
