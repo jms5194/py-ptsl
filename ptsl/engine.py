@@ -1353,12 +1353,9 @@ class Engine:
     # PT 2025.10
     # TODO add CreateSignalPath,
     # TODO add SetTrackMainOutputAssignments,
-    # TODO add GetTrackControlInfo
-    # TODO add GetTrackControlBreakpoints, SetTrackControlBreakpoints
-    # TODO add InstallMenuHandler, UninstallMenuHandler
     # TODO add SetTrackColor, GetTrackPlaylists, SetTrackTimebase,
     # TODO add GetColorPalette
-    # TODO add DeleteTracks, GetPlaylistElements,
+    # TODO add DeleteTracks
     # TODO add WriteSelectedTranscriptionToJSONFile
     # TODO add CreateBatchJob, GetBatchJobStatus, CompleteBatchJob,
     # TODO add CancelBatchJob
