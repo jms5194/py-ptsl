@@ -151,6 +151,7 @@ from .get_session_ids import CId_GetSessionsIDs
 # Pro Tools 2025.6
 
 from .get_edit_selection import CId_GetEditSelection
+from .get_monitor_output_path import CId_GetMonitorOutputPath
 
 # Pro Tools 2025.10
 

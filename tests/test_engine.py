@@ -692,3 +692,45 @@ class TestEngine(TestCase):
                 engine.set_track_dsp_mode_safe_state(track_names=test_track,
                                                      new_state=True)
             )
+
+    def test_group_clips(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.group_clips()
+            )
+
+    def test_ungroup_clips(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.ungroup_clips()
+            )
+
+    def test_ungroup_all_clips(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.ungroup_all_clips()
+            )
+
+    def test_regroup_clips(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.regroup_clips()
+            )
+
+    def test_repeat_selection(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.repeat_selection(repeats=2)
+            )
+
+    def test_duplicate_selection(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.duplicate_selection()
+            )
+
+    def test_clear_all_memory_locations(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.clear_all_memory_locations()
+            )

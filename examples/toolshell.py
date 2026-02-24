@@ -513,6 +513,11 @@ To begin, type `connect`.
         """Clear all memory locations"""
         self.run_command_on_session(pt.CId_ClearAllMemoryLocations, {})
 
+    def do_getmonitoroutputpath(self, _):
+        """Get the monitor output path"""
+        r = self.run_command_on_session(pt.CId_GetMonitorOutputPath, {})
+        print(f"Monitor Output Path: {r['monitor_path']}")
+
     def do_bye(self, _):
         """Quit Toolshell and return to your shell: BYE"""
         print("Toolshell quitting...")

@@ -1324,10 +1324,18 @@ class Engine:
     # TODO add ImportAudioToClipList, SpotClipsByID, GetClipList
     # TODO add GetMediaFileInfo, CreateAudioClips,
     # TODO add GetExportMixSourceList
-    # TODO add GetMonitorOutputPath, BounceTrack,
-    # TODO add BeginScrub, EndScrub, ContinueScrub
-    # TODO add EnableCueProVideoPlugIn, UpdateVideo, EnableAPI,
-    # TODO ExchangePublicKeys
+    # TODO add BounceTrack
+
+    def get_monitor_output_path(self) -> str:
+        """
+        Gets monitor output path from I/O Setup.
+
+        :returns: a string containing the monitor output path
+        """
+        op = ops.CId_GetMonitorOutputPath()
+        self.client.run(op)
+
+        return op.response.monitor_path
 
     def get_edit_selection(
             self, loc_type: TimelineLocationType = TLType_TimeCode
