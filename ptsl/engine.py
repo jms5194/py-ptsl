@@ -1179,9 +1179,8 @@ class Engine:
         """
         op = ops.CId_GetMainCounterFormat()
         self.client.run(op)
-        main_format = json.loads(op.response)
 
-        return main_format
+        return op.response
 
     def undo(self, depth: int = 1) -> dict[str, list[str]]:
         """
@@ -1215,9 +1214,8 @@ class Engine:
         """
         op = ops.CId_UndoAll()
         self.client.run(op)
-        undone_steps = json.loads(op.response)
 
-        return undone_steps
+        return op.response
 
     def redoall(self) -> dict[str, list[str]]:
         """
@@ -1227,9 +1225,8 @@ class Engine:
         """
         op = ops.CId_RedoAll()
         self.client.run(op)
-        undone_steps = json.loads(op.response)
 
-        return undone_steps
+        return op.response
 
     def clear_undo_queue(self) -> None:
         """
