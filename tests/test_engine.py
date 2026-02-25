@@ -707,7 +707,8 @@ class TestEngine(TestCase):
                                                    pt.TLType_Frames,
                                                    pt.TLType_BarsBeats,
                                                    pt.TLType_MinSecs,
-            ])
+                                                   pt.TLType_Ticks,
+                                                   pt.TLType_Seconds])
 
     def test_clear_undo_queue(self):
         with open_engine_with_mock_client() as engine:
