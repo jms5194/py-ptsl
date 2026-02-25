@@ -907,8 +907,7 @@ class Engine:
         """
         op = ops.CId_GetEditMode()
         self.client.run(op)
-        edit_mode = json.loads(op.response)
-        return edit_mode
+        return op.response
 
     def set_edit_mode(self, mode: EditMode) -> None:
         """
@@ -1133,8 +1132,8 @@ class Engine:
         """
         op = ops.CId_GetSessionsIDs()
         self.client.run(op)
-        session_id = json.loads(op.response)
-        return session_id
+
+        return op.response
 
     # PT 2024.06
 

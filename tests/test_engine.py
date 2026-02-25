@@ -563,6 +563,39 @@ class TestEngine(TestCase):
                                                      new_state=True)
             )
 
+    def test_get_edit_mode(self):
+        fixture= pt.GetEditModeResponseBody(
+            current_setting=pt.EMO_Slip,
+            possible_settings=[pt.EMO_Shuffle,
+                               pt.EMO_Slip,
+                               pt.EMO_Spot,
+                               pt.EMO_GridAbsolute,
+                               pt.EMO_GridRelative,
+                               pt.EMO_Shuffle,
+                               pt.EMO_ShuffleSnapToGridAbsolute,
+                               pt.EMO_ShuffleSnapToGridRelative,
+                               pt.EMO_SlipSnapToGridAbsolute,
+                               pt.EMO_SlipSnapToGridRelative,
+                               pt.EMO_SpotSnapToGridAbsolute,
+                               pt.EMO_SpotSnapToGridRelative,
+                               ]
+        )
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_edit_mode()
+            self.assertEqual(got, pt.GetEditModeResponseBody(
+                current_setting=pt.EMO_Slip,
+                possible_settings=[pt.EMO_Shuffle,
+                                   pt.EMO_Slip,
+                                   pt.EMO_Spot,
+                                   pt.EMO_GridAbsolute,
+                                   pt.EMO_GridRelative,
+                                   pt.EMO_Shuffle,
+                                   pt.EMO_ShuffleSnapToGridAbsolute,
+                                   pt.EMO_ShuffleSnapToGridRelative,
+                                   pt.EMO_SlipSnapToGridAbsolute,
+                ]
+            ))
+
     def test_set_edit_mode(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
@@ -660,6 +693,18 @@ class TestEngine(TestCase):
                 engine.set_track_open_state(track_names=test_track,
                                             new_state=True)
             )
+
+    def test_get_session_ids(self):
+        fixture= pt.GetSessionIDsResponseBody(
+            origin_id= "{00000000-2a000000-086ed1e0-94ef763d}",
+            instance_id= "{00000000-2a000000-086ed1e0-94ef763d}",
+            parent_id= "{00000000-00000000-00000000-00000000}"
+        )
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_session_ids()
+            self.assertEqual(got.origin_id, "{00000000-2a000000-086ed1e0-94ef763d}")
+            self.assertEqual(got.instance_id, "{00000000-2a000000-086ed1e0-94ef763d}")
+            self.assertEqual(got.parent_id, "{00000000-00000000-00000000-00000000}")
 
     def test_get_memory_locations_manage_mode(self):
         fixture= pt.GetMemoryLocationsManageModeResponseBody(
