@@ -1182,6 +1182,16 @@ class Engine:
 
         return op.response
 
+    def get_sub_counter_format(self) -> dict[str, str]:
+        """
+        Gets the time format of the Sub Counter
+        as well as all possible options.
+        """
+        op = ops.CId_GetSubCounterFormat()
+        self.client.run(op)
+
+        return op.response
+
     def undo(self, depth: int = 1) -> dict[str, list[str]]:
         """
         Undoes the last number of operations, according to depth parameter.
@@ -1190,9 +1200,8 @@ class Engine:
         """
         op = ops.CId_Undo(levels=depth)
         self.client.run(op)
-        undone_steps = json.loads(op.response)
 
-        return undone_steps
+        return op.response
 
     def redo(self, depth: int = 1) -> dict[str, list[str]]:
         """
