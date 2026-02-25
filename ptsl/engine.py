@@ -1192,7 +1192,7 @@ class Engine:
 
         return op.response
 
-    def undo(self, depth: int = 1) -> dict[str, list[str]]:
+    def undo(self, depth: int = 1) -> dict[str, list[dict[str, str]]]:
         """
         Undoes the last number of operations, according to depth parameter.
 

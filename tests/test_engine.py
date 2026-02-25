@@ -738,6 +738,21 @@ class TestEngine(TestCase):
 
             ])
 
+    def test_undo(self):
+        fixture = pt.UndoResponseBody(
+            operations= [pt.UndoHistoryOperation(
+            time="2024-08-26T12:43:18+0300",
+            operation= "Change Session Start",
+            details= "00:00:00:00 to 00:00:00:01"
+            )])
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.undo()
+            self.assertIsNone(got.operations[0], pt.UndoHistoryOperation(
+                time="2024-08-26T12:43:18+0300",
+                operation= "Change Session Start",
+                details= "00:00:00:00 to 00:00:00:01"
+            ))
+
     def test_clear_undo_queue(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
