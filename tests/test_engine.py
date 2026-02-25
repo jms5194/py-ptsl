@@ -746,8 +746,53 @@ class TestEngine(TestCase):
             details= "00:00:00:00 to 00:00:00:01"
             )])
         with open_engine_with_mock_client(fixture) as engine:
-            got = engine.undo()
-            self.assertIsNone(got.operations[0], pt.UndoHistoryOperation(
+            got = engine.undo(levels=1)
+            self.assertEqual(got.operations[0], pt.UndoHistoryOperation(
+                time="2024-08-26T12:43:18+0300",
+                operation= "Change Session Start",
+                details= "00:00:00:00 to 00:00:00:01"
+            ))
+
+    def test_redo(self):
+        fixture = pt.RedoResponseBody(
+            operations= [pt.UndoHistoryOperation(
+            time="2024-08-26T12:43:18+0300",
+            operation= "Change Session Start",
+            details= "00:00:00:00 to 00:00:00:01"
+            )])
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.redo(levels=1)
+            self.assertEqual(got.operations[0], pt.UndoHistoryOperation(
+                time="2024-08-26T12:43:18+0300",
+                operation= "Change Session Start",
+                details= "00:00:00:00 to 00:00:00:01"
+            ))
+
+    def test_undoall(self):
+        fixture = pt.UndoResponseBody(
+            operations= [pt.UndoHistoryOperation(
+            time="2024-08-26T12:43:18+0300",
+            operation= "Change Session Start",
+            details= "00:00:00:00 to 00:00:00:01"
+            )])
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.undoall()
+            self.assertEqual(got.operations[0], pt.UndoHistoryOperation(
+                time="2024-08-26T12:43:18+0300",
+                operation= "Change Session Start",
+                details= "00:00:00:00 to 00:00:00:01"
+            ))
+
+    def test_redoall(self):
+        fixture = pt.RedoResponseBody(
+            operations= [pt.UndoHistoryOperation(
+            time="2024-08-26T12:43:18+0300",
+            operation= "Change Session Start",
+            details= "00:00:00:00 to 00:00:00:01"
+            )])
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.redoall()
+            self.assertEqual(got.operations[0], pt.UndoHistoryOperation(
                 time="2024-08-26T12:43:18+0300",
                 operation= "Change Session Start",
                 details= "00:00:00:00 to 00:00:00:01"
