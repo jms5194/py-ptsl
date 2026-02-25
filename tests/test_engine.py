@@ -661,6 +661,14 @@ class TestEngine(TestCase):
                                             new_state=True)
             )
 
+    def test_get_memory_locations_manage_mode(self):
+        fixture= pt.GetMemoryLocationsManageModeResponseBody(
+            enabled=True
+        )
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_memory_locations_manage_mode()
+            self.assertTrue(got.enabled)
+
     def test_set_memory_locations_manage_mode(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
