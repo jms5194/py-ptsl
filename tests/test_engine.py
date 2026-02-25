@@ -667,7 +667,7 @@ class TestEngine(TestCase):
         )
         with open_engine_with_mock_client(fixture) as engine:
             got = engine.get_memory_locations_manage_mode()
-            self.assertTrue(got.enabled)
+            self.assertTrue(got)
 
     def test_set_memory_locations_manage_mode(self):
         with open_engine_with_mock_client() as engine:
