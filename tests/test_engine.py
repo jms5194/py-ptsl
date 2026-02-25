@@ -565,37 +565,37 @@ class TestEngine(TestCase):
 
     def test_get_edit_mode(self):
         fixture= pt.GetEditModeResponseBody(
-            current_setting=pt.EMO_Slip,
-            possible_settings=[pt.EMO_Shuffle,
-                               pt.EMO_Slip,
-                               pt.EMO_Spot,
-                               pt.EMO_GridAbsolute,
-                               pt.EMO_GridRelative,
-                               pt.EMO_Shuffle,
-                               pt.EMO_ShuffleSnapToGridAbsolute,
-                               pt.EMO_ShuffleSnapToGridRelative,
-                               pt.EMO_SlipSnapToGridAbsolute,
-                               pt.EMO_SlipSnapToGridRelative,
-                               pt.EMO_SpotSnapToGridAbsolute,
-                               pt.EMO_SpotSnapToGridRelative,
+            current_setting=pt.EMode_Slip,
+            possible_settings=[pt.EMode_Shuffle,
+                               pt.EMode_Slip,
+                               pt.EMode_Spot,
+                               pt.EMode_GridAbsolute,
+                               pt.EMode_GridRelative,
+                               pt.EMode_Shuffle,
+                               pt.EMode_ShuffleSnapToGridAbsolute,
+                               pt.EMode_ShuffleSnapToGridRelative,
+                               pt.EMode_SlipSnapToGridAbsolute,
+                               pt.EMode_SlipSnapToGridRelative,
+                               pt.EMode_SpotSnapToGridAbsolute,
+                               pt.EMode_SpotSnapToGridRelative,
                                ]
         )
         with open_engine_with_mock_client(fixture) as engine:
             got = engine.get_edit_mode()
             self.assertEqual(got, pt.GetEditModeResponseBody(
-                current_setting=pt.EMO_Slip,
-                possible_settings=[pt.EMO_Shuffle,
-                                   pt.EMO_Slip,
-                                   pt.EMO_Spot,
-                                   pt.EMO_GridAbsolute,
-                                   pt.EMO_GridRelative,
-                                   pt.EMO_Shuffle,
-                                   pt.EMO_ShuffleSnapToGridAbsolute,
-                                   pt.EMO_ShuffleSnapToGridRelative,
-                                   pt.EMO_SlipSnapToGridAbsolute,
-                                   pt.EMO_SlipSnapToGridRelative,
-                                   pt.EMO_SpotSnapToGridAbsolute,
-                                   pt.EMO_SpotSnapToGridRelative,
+                current_setting=pt.EMode_Slip,
+                possible_settings=[pt.EMode_Shuffle,
+                                   pt.EMode_Slip,
+                                   pt.EMode_Spot,
+                                   pt.EMode_GridAbsolute,
+                                   pt.EMode_GridRelative,
+                                   pt.EMode_Shuffle,
+                                   pt.EMode_ShuffleSnapToGridAbsolute,
+                                   pt.EMode_ShuffleSnapToGridRelative,
+                                   pt.EMode_SlipSnapToGridAbsolute,
+                                   pt.EMode_SlipSnapToGridRelative,
+                                   pt.EMode_SpotSnapToGridAbsolute,
+                                   pt.EMode_SpotSnapToGridRelative,
                 ]
             ))
 
