@@ -1211,9 +1211,8 @@ class Engine:
         """
         op = ops.CId_Redo(levels=depth)
         self.client.run(op)
-        redone_steps = json.loads(op.response)
 
-        return redone_steps
+        return op.response
 
     def undoall(self) -> dict[str, list[str]]:
         """
