@@ -695,7 +695,19 @@ class TestEngine(TestCase):
                              ])
         with open_engine_with_mock_client(fixture) as engine:
             got = engine.get_main_counter_format()
-            self.assertEqual(got, pt.TOOptions_TimeCode)
+            self.assertEqual(got.current_setting, pt.TOOptions_BarsBeats)
+            self.assertEqual(got.current_type, pt.TLType_TimeCode)
+            self.assertEqual(got.possible_settings, [pt.TOOptions_BarsBeats,
+                                                     pt.TOOptions_TimeCode,
+                                                     pt.TOOptions_FeetFrames,
+                                                     pt.TOOptions_Samples])
+            self.assertEqual(got.possible_types, [pt.TLType_TimeCode,
+                                                   pt.TLType_FeetFrames,
+                                                   pt.TLType_Samples,
+                                                   pt.TLType_Frames,
+                                                   pt.TLType_BarsBeats,
+                                                   pt.TLType_MinSecs,
+            ])
 
     def test_clear_undo_queue(self):
         with open_engine_with_mock_client() as engine:
