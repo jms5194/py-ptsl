@@ -679,6 +679,24 @@ class TestEngine(TestCase):
                 engine.set_sub_counter_format(new_loc_type=pt.TLType_TimeCode)
             )
 
+    def test_get_main_counter_format(self):
+        fixture = pt.GetMainCounterFormatResponseBody(
+            current_setting=pt.TOOptions_BarsBeats,
+            possible_settings=[pt.TOOptions_BarsBeats,
+                                pt.TOOptions_TimeCode,
+                                pt.TOOptions_FeetFrames,
+                                pt.TOOptions_Samples
+                               ],
+            current_type=pt.TLType_TimeCode,
+            possible_types= [pt.TLType_TimeCode, pt.TLType_FeetFrames,
+                             pt.TLType_Samples, pt.TLType_Frames,
+                             pt.TLType_BarsBeats, pt.TLType_MinSecs,
+                             pt.TLType_Ticks, pt.TLType_Seconds
+                             ])
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_main_counter_format()
+            self.assertEqual(got, pt.TOOptions_TimeCode)
+
     def test_clear_undo_queue(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
@@ -692,6 +710,14 @@ class TestEngine(TestCase):
                 engine.set_track_dsp_mode_safe_state(track_names=test_track,
                                                      new_state=True)
             )
+
+    def test_get_system_delay(self):
+        fixture = pt.GetSessionSystemDelayInfoResponseBody(
+            samples= 1, delay_compensation_enabled= True
+        )
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_system_delay()
+            self.assertEqual(got, 1)
 
     def test_group_clips(self):
         with open_engine_with_mock_client() as engine:
@@ -716,7 +742,6 @@ class TestEngine(TestCase):
             self.assertIsNone(
                 engine.regroup_clips()
             )
-
     def test_repeat_selection(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
@@ -734,3 +759,16 @@ class TestEngine(TestCase):
             self.assertIsNone(
                 engine.clear_all_memory_locations()
             )
+
+    def test_get_monitor_output_path(self):
+        fixture = pt.GetMonitorOutputPathResponseBody(
+            monitor_path="xyz1")
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_monitor_output_path()
+            self.assertEqual(got, "xyz1")
+
+    def test_get_edit_selection(self):
+        fixture = pt.GetEditSelectionResponseBody(in_time="xyz1", out_time="xyz2")
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_edit_selection()
+            self.assertEqual(got, ("xyz1", "xyz2"))

@@ -1303,7 +1303,7 @@ class Engine:
     def duplicate_selection(self) -> None:
         """
         Copies a selection and places it immediately
-         fter the end of the selection.
+        after the end of the selection.
         """
         op = ops.CId_DuplicateSelection()
         self.client.run(op)
@@ -1355,6 +1355,7 @@ class Engine:
     # TODO add SetTrackMainOutputAssignments,
     # TODO add SetTrackColor, GetTrackPlaylists, SetTrackTimebase,
     # TODO add GetColorPalette
+
     # TODO add DeleteTracks
     # TODO add WriteSelectedTranscriptionToJSONFile
     # TODO add CreateBatchJob, GetBatchJobStatus, CompleteBatchJob,
