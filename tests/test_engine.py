@@ -593,6 +593,9 @@ class TestEngine(TestCase):
                                    pt.EMO_ShuffleSnapToGridAbsolute,
                                    pt.EMO_ShuffleSnapToGridRelative,
                                    pt.EMO_SlipSnapToGridAbsolute,
+                                   pt.EMO_SlipSnapToGridRelative,
+                                   pt.EMO_SpotSnapToGridAbsolute,
+                                   pt.EMO_SpotSnapToGridRelative,
                 ]
             ))
 
