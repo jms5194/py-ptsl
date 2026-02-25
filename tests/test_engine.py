@@ -611,6 +611,56 @@ class TestEngine(TestCase):
                 engine.set_edit_tool(tool=pt.ET_SmartTool)
             )
 
+    def test_get_edit_tool(self):
+        fixture= pt.GetEditToolResponseBody(
+            current_setting=pt.ET_SmartTool,
+            possible_settings=[pt.ET_SmartTool,
+                               pt.ET_ZoomNormal,
+                               pt.ET_ZoomSingle,
+                               pt.ET_Scrubber,
+                               pt.ET_Selector,
+                               pt.ET_GrabberObject,
+                               pt.ET_GrabberSeparation,
+                               pt.ET_GrabberTime,
+                               pt.ET_PencilFreeHand,
+                               pt.ET_PencilLine,
+                               pt.ET_PencilParabolic,
+                               pt.ET_PencilRandom,
+                               pt.ET_PencilFreeHand,
+                               pt.ET_PencilSquare,
+                               pt.ET_PencilTriangle,
+                               pt.ET_TrimTce,
+                               pt.ET_TrimLoop,
+                               pt.ET_TrimScrub,
+                               pt.ET_TrimStandard,
+                               ]
+        )
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_edit_tool()
+            self.assertEqual(got, pt.GetEditToolResponseBody(
+                current_setting=pt.ET_SmartTool,
+                possible_settings=[pt.ET_SmartTool,
+                               pt.ET_ZoomNormal,
+                               pt.ET_ZoomSingle,
+                               pt.ET_Scrubber,
+                               pt.ET_Selector,
+                               pt.ET_GrabberObject,
+                               pt.ET_GrabberSeparation,
+                               pt.ET_GrabberTime,
+                               pt.ET_PencilFreeHand,
+                               pt.ET_PencilLine,
+                               pt.ET_PencilParabolic,
+                               pt.ET_PencilRandom,
+                               pt.ET_PencilFreeHand,
+                               pt.ET_PencilSquare,
+                               pt.ET_PencilTriangle,
+                               pt.ET_TrimTce,
+                               pt.ET_TrimLoop,
+                               pt.ET_TrimScrub,
+                               pt.ET_TrimStandard,
+                ]
+            ))
+
     def test_select_memory_location(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(

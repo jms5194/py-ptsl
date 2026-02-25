@@ -898,7 +898,7 @@ class Engine:
 
         self.client.run(op)
 
-    def get_edit_mode(self) -> dict[str, str]:
+    def get_edit_mode(self) -> dict[str, EditMode | list[EditMode]]:
         """
         Gets the current session edit mode as well as all possible options
 
@@ -925,8 +925,7 @@ class Engine:
         """
         op = ops.CId_GetEditTool()
         self.client.run(op)
-        edit_tool = json.loads(op.response)
-        return edit_tool
+        return op.response
 
     def set_edit_tool(self, tool: EditTool) -> None:
         """
