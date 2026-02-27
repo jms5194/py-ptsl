@@ -26,7 +26,8 @@ class Operation(Generic[Q, R]):
             cls_name = cls.__name__[4:]
             return getattr(pt, cls_name + "RequestBody", None)
         else:
-            return getattr(pt, cls.__name__ + "RequestBody", None)  # type: ignore
+            return getattr(
+                pt, cls.__name__ + "RequestBody", None)  # type: ignore
 
     @classmethod
     def response_body(cls) -> R:
@@ -34,7 +35,8 @@ class Operation(Generic[Q, R]):
             cls_name = cls.__name__[4:]
             return getattr(pt, cls_name + "ResponseBody", None)
         else:
-            return getattr(pt, cls.__name__ + "ResponseBody", None)  # type: ignore
+            return getattr(
+                pt, cls.__name__ + "ResponseBody", None)  # type: ignore
 
     @classmethod
     def command_id(cls):
