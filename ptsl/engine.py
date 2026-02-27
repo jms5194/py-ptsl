@@ -960,10 +960,12 @@ class Engine:
                                pre_roll_start_time: Optional[str] = None,
                                post_roll_stop_time: Optional[str] = None,
                                pre_roll_enabled: Optional[TripleBool] = None,
+                               post_roll_enabled: Optional[TripleBool] = None,
                                update_video_to:
                                Optional[TimelineUpdateVideo] = None,
                                propagate_to_satellites:
-                               Optional[TripleBool] = None
+                               Optional[TripleBool] = None,
+                               location_type: TimelineLocationType = TLType_TimeCode
                                ) -> None:
         """
         Set Selection at Timecode
@@ -975,8 +977,10 @@ class Engine:
             pre_roll_start_time=pre_roll_start_time,
             post_roll_stop_time=post_roll_stop_time,
             pre_roll_enabled=pre_roll_enabled,
+            post_roll_enabled=post_roll_enabled,
             update_video_to=update_video_to,
-            propagate_to_satellites=propagate_to_satellites
+            propagate_to_satellites=propagate_to_satellites,
+            location_type=location_type
         )
         self.client.run(op)
 

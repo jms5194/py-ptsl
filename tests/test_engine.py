@@ -685,6 +685,9 @@ class TestEngine(TestCase):
                                              post_roll_stop_time= "1098424",
                                              pre_roll_enabled= False,
                                              pre_roll_start_time= "998424",
+                                             update_video_to= pt.TUVideo_None,
+                                             propagate_to_satellites= False,
+                                             location_type= pt.TLType_TimeCode
                                              )
             )
 
@@ -730,7 +733,8 @@ class TestEngine(TestCase):
         with open_engine_with_mock_client() as engine:
             test_track = ["xyz1"]
             self.assertIsNone(
-                engine.set_track_record_safe_enable_state(track_names=test_track,)
+                engine.set_track_record_safe_enable_state(track_names=test_track,
+                                                          new_state=True)
             )
 
     def test_set_track_input_monitor_state(self):
