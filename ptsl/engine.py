@@ -964,8 +964,8 @@ class Engine:
                                Optional[TimelineUpdateVideo] = None,
                                propagate_to_satellites:
                                Optional[TripleBool] = None,
-                               location_type: \
-                                       TimelineLocationType = TLType_TimeCode
+                               location_type:
+                               TimelineLocationType = TLType_TimeCode
                                ) -> None:
         """
         Set Selection at Timecode
