@@ -34,8 +34,6 @@ from ptsl.PTSL_pb2 import SessionAudioFormat, BitDepth, FileLocation, \
     TimelineLocationType, TLType_TimeCode, \
     EditMode, EditTool
 
-import json
-
 
 @contextmanager
 def open_engine(*args, **kwargs):
@@ -941,7 +939,8 @@ class Engine:
         op = ops.CId_RecallZoomPreset(zoom_preset=preset)
         self.client.run(op)
 
-    def get_timeline_selection(self, format: TimelineLocationType = TLType_TimeCode
+    def get_timeline_selection(self,
+                               format: TimelineLocationType = TLType_TimeCode
                                ) -> Tuple[str, str]:
         """
         Returns data about the current timeline selection.
@@ -965,7 +964,8 @@ class Engine:
                                Optional[TimelineUpdateVideo] = None,
                                propagate_to_satellites:
                                Optional[TripleBool] = None,
-                               location_type: TimelineLocationType = TLType_TimeCode
+                               location_type: \
+                                       TimelineLocationType = TLType_TimeCode
                                ) -> None:
         """
         Set Selection at Timecode
