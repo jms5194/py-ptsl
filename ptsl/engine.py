@@ -941,17 +941,17 @@ class Engine:
         op = ops.CId_RecallZoomPreset(zoom_preset=preset)
         self.client.run(op)
 
-    def get_timeline_selection(self, format: TrackOffsetOptions = TimeCode
+    def get_timeline_selection(self, format: TimelineLocationType = TLType_TimeCode
                                ) -> Tuple[str, str]:
         """
         Returns data about the current timeline selection.
 
         :returns: a Tuple of the In and Out time.
         """
-        op = ops.CId_GetTimelineSelection(time_scale=format)
+        op = ops.CId_GetTimelineSelection(location_type=format)
         self.client.run(op)
 
-        return (op.response.in_time, op.response.out_time)
+        return op.response.in_time, op.response.out_time
 
     def set_timeline_selection(self,
                                in_time: Optional[str],

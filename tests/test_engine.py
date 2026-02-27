@@ -555,13 +555,6 @@ class TestEngine(TestCase):
                 engine.set_session_interleaved_state(new_state=True)
             )
 
-    def test_set_track_record_enable_state(self):
-        with open_engine_with_mock_client() as engine:
-            test_track = ["xyz1"]
-            self.assertIsNone(
-                engine.set_track_record_enable_state(track_names=test_track,
-                                                     new_state=True)
-            )
 
     def test_get_edit_mode(self):
         fixture= pt.GetEditModeResponseBody(
@@ -661,6 +654,40 @@ class TestEngine(TestCase):
                 ]
             ))
 
+    def test_recall_zoom_preset(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.recall_zoom_preset(preset=1)
+            )
+
+    def test_get_timeline_selection(self):
+        fixture = pt.GetTimelineSelectionResponseBody(
+            in_time= "998424",
+            out_time= "1098424",
+            play_start_marker_time= "998424",
+            post_roll_enabled= False,
+            post_roll_stop_time= "1098424",
+            pre_roll_enabled= False,
+            pre_roll_start_time= "998424",
+        )
+        with open_engine_with_mock_client(fixture) as engine:
+            got = engine.get_timeline_selection()
+            self.assertEqual(got, ("998424", "1098424")
+            )
+
+    def test_set_timeline_selection(self):
+        with open_engine_with_mock_client() as engine:
+            self.assertIsNone(
+                engine.set_timeline_selection(in_time= "998424",
+                                             out_time= "1098424",
+                                             play_start_marker_time= "998424",
+                                             post_roll_enabled= False,
+                                             post_roll_stop_time= "1098424",
+                                             pre_roll_enabled= False,
+                                             pre_roll_start_time= "998424",
+                                             )
+            )
+
     def test_select_memory_location(self):
         with open_engine_with_mock_client() as engine:
             self.assertIsNone(
@@ -689,6 +716,21 @@ class TestEngine(TestCase):
             self.assertIsNone(
                 engine.set_track_solo_safe_state(track_names=test_track,
                                                  new_state=True)
+            )
+
+    def test_set_track_record_enable_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_record_enable_state(track_names=test_track,
+                                                     new_state=True)
+            )
+
+    def test_set_track_record_safe_enable_state(self):
+        with open_engine_with_mock_client() as engine:
+            test_track = ["xyz1"]
+            self.assertIsNone(
+                engine.set_track_record_safe_enable_state(track_names=test_track,)
             )
 
     def test_set_track_input_monitor_state(self):
