@@ -1348,7 +1348,7 @@ class Engine:
             "time_type" : in_type,
         }
 
-        op = ops.CId_GetTimeAsType(location=format_loc, requested_type=req_type)
+        op = ops.CId_GetTimeAsType(location=format_loc, time_type=req_type)
         self.client.run(op)
 
         return op.response.converted_location.location
