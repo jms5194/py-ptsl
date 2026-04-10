@@ -32,7 +32,8 @@ from ptsl.PTSL_pb2 import SessionAudioFormat, BitDepth, FileLocation, \
     SpotLocationType, Start, TimeCode, \
     TimelineUpdateVideo, SelectionMode, \
     TimelineLocationType, TLType_TimeCode, \
-    EditMode, EditTool
+    EditMode, EditTool, \
+    TLType_Samples
 
 
 @contextmanager
@@ -1325,13 +1326,32 @@ class Engine:
         self.client.run(op)
 
     # PT 2025.6
-    # TODO add GetTimeAsType, SubtractLocations
+    # TODO SubtractLocations
     # TODO add AddLengthToLocation, SubtractPositions,
     # TODO add AddLengthToPosition
     # TODO add ImportAudioToClipList, SpotClipsByID, GetClipList
     # TODO add GetMediaFileInfo, CreateAudioClips,
     # TODO add GetExportMixSourceList
     # TODO add BounceTrack
+
+    def get_time_as_type(self, in_loc: str,
+                         in_type: TimelineLocationType = TLType_Samples,
+                         req_type: TimelineLocationType = TLType_Samples):
+        """
+        Converts given timeline location between units.
+        Supply both the location string and the incoming and outgoing types.
+
+        :returns: a string of the converted value.
+        """
+        format_loc = {
+            "location" : in_loc,
+            "time_type" : in_type,
+        }
+
+        op = ops.CId_GetTimeAsType(location=format_loc, requested_type=req_type)
+        self.client.run(op)
+
+        return op.response.converted_location.location
 
     def get_monitor_output_path(self) -> str:
         """
