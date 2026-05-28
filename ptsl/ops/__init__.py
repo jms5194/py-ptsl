@@ -146,7 +146,7 @@ from .clear_all_memory_locations import CId_ClearAllMemoryLocations
 
 # Pro Tools 2024.3
 
-from .get_session_ids import CId_GetSessionsIDs
+from .get_session_ids import CId_GetSessionIDs
 
 # Pro Tools 2025.6
 

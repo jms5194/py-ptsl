@@ -1134,7 +1134,7 @@ class Engine:
         :returns: A dictionary containing the originId, instanceId,
         and parentId of the current opened session
         """
-        op = ops.CId_GetSessionsIDs()
+        op = ops.CId_GetSessionIDs()
         self.client.run(op)
 
         return op.response
