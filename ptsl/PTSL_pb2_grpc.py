@@ -5,7 +5,7 @@ import warnings
 
 from . import PTSL_pb2 as PTSL__pb2
 
-GRPC_GENERATED_VERSION = '1.76.0'
+GRPC_GENERATED_VERSION = '1.80.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -27,6 +27,15 @@ if _version_not_supported:
 
 class PTSLStub(object):
     """*
+    "@protocol special_none NUMBER"
+
+    This option indicates that a special enumerator with the name "None" and the specified NUMBER value should be added to the enumeration.
+    This is purely host side deserialization addition due to clashing names between enumerations.
+    Shouldn't be used.
+
+    @endcond
+
+    *
     Service for handling different types of Pro Tools commands using PTSL Client.
     """
 
@@ -50,6 +59,15 @@ class PTSLStub(object):
 
 class PTSLServicer(object):
     """*
+    "@protocol special_none NUMBER"
+
+    This option indicates that a special enumerator with the name "None" and the specified NUMBER value should be added to the enumeration.
+    This is purely host side deserialization addition due to clashing names between enumerations.
+    Shouldn't be used.
+
+    @endcond
+
+    *
     Service for handling different types of Pro Tools commands using PTSL Client.
     """
 
@@ -94,6 +112,15 @@ def add_PTSLServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class PTSL(object):
     """*
+    "@protocol special_none NUMBER"
+
+    This option indicates that a special enumerator with the name "None" and the specified NUMBER value should be added to the enumeration.
+    This is purely host side deserialization addition due to clashing names between enumerations.
+    Shouldn't be used.
+
+    @endcond
+
+    *
     Service for handling different types of Pro Tools commands using PTSL Client.
     """
 

@@ -1387,3 +1387,9 @@ class Engine:
     # TODO add WriteSelectedTranscriptionToJSONFile
     # TODO add CreateBatchJob, GetBatchJobStatus, CompleteBatchJob,
     # TODO add CancelBatchJob
+
+    # PT 2026.04
+    # TODO add ClearTrackMainOutputsAssignments,
+    # TODO add DeleteSignalPaths, GetRendererOutSignalPath,
+    # TODO add GetTrackMainOutputAssignments,
+    # TODO add SetTrackHeight, ShowRendererWindow
